@@ -29,7 +29,7 @@ export function BurgerBar() {
 
 	return (
 		<>
-			<button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-20", open ? `text-neutral-200` : `text-neutral-900`)}>
+			<button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-20", open ? `text-neutral-200 dark:text-neutral-900` : `text-neutral-900 dark:text-neutral-200`)}>
 				<div onClick={toggle} className="w-12 h-12 flex flex-col justify-between items-center">
 					<Hamburger open={open} />
 				</div>
@@ -37,12 +37,12 @@ export function BurgerBar() {
 			</button>
 			<nav
 				style={{ transition: open ? `opacity 250ms ease, left 0ms 0ms ease` : `opacity 250ms ease, left 0ms 250ms ease` }}
-				className={clsx("fixed top-0 h-screen w-screen lg:w-[20vw] bg-neutral-900 z-10", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
+				className={clsx("fixed top-0 h-screen w-screen lg:w-[20vw] bg-neutral-900 dark:bg-neutral-100 z-10", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
 			>
 				<div className="h-24"></div>
 				<section id="links" className={clsx("grid gap-2 px-8")}>
 					{MENU_LINKS.map(({ label, href }) => (
-						<a key={href} href={href} className="text-2xl font-bold text-neutral-200">
+						<a key={href} href={href} className="text-2xl font-bold text-neutral-200 dark:text-neutral-800">
 							{label}
 						</a>
 					))}

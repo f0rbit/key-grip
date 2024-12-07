@@ -24,11 +24,11 @@ export default function Home() {
 function EPLink({ label, href, year }: Readonly<{ label: string; href: string; year: string }>) { 
 
 	return (
-		<Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-all duration-300 origin-left">
-			<h3 className="text-2xl font-bold text-gray-800">
+		<Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-all duration-300 origin-left group">
+			<h3 className="transition-all duration-300 text-2xl font-bold text-neutral-800 dark:text-neutral-200 dark:group-hover:text-neutral-50">
 				{label}
 			</h3>
-			<p className="text-gray-500">{year}</p>
+			<p className="transition-all duration-300 text-neutral-500 dark:text-neutral-400 dark:group-hover:text-neutral-300">{year}</p>
 		</Link>
 	);
 }
