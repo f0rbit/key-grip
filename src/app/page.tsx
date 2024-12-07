@@ -1,14 +1,21 @@
+import { SocialIcons } from "@/components/socials";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
-		<h1>Key Grip</h1>
+		{/* <h1>Key Grip</h1> */}
 
 		<section className="absolute bottom-6 left-6 grid gap-2">
 			<EPLink label="NEW EP" href="/ep2" year="2024" />
 			<EPLink label="Key Grip...?" href="/ep1" year="2023" />
+			<br />
+
+		</section>
+
+		<section className="absolute bottom-6 right-6 grid gap-2">
+			<SocialIcons direction="row" />
 		</section>
     </div>
   );
