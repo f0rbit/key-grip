@@ -29,17 +29,20 @@ export function BurgerBar() {
 
 	return (
 		<>
-			<button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-10")}>
+			<button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-20", open ? `text-neutral-200` : `text-neutral-900`)}>
 				<div onClick={toggle} className="w-12 h-12 flex flex-col justify-between items-center">
 					<Hamburger open={open} />
 				</div>
 				<p>{open ? "Close" : "Menu"}</p>
 			</button>
-			<nav style={{ transition: open ? `opacity 250ms ease, left 0ms 0ms ease` : `opacity 250ms ease, left 0ms 250ms ease` }}className={clsx("fixed top-0 h-screen w-[20vw] bg-red-300", open ? "left-0 opacity-1" : " -left-[20vw] opacity-0")}>
+			<nav
+				style={{ transition: open ? `opacity 250ms ease, left 0ms 0ms ease` : `opacity 250ms ease, left 0ms 250ms ease` }}
+				className={clsx("fixed top-0 h-screen w-screen lg:w-[20vw] bg-neutral-900 z-10", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
+			>
 				<div className="h-24"></div>
 				<section id="links" className={clsx("grid gap-2 px-8")}>
 					{MENU_LINKS.map(({ label, href }) => (
-						<a key={href} href={href} className="text-2xl font-bold text-gray-800">
+						<a key={href} href={href} className="text-2xl font-bold text-neutral-200">
 							{label}
 						</a>
 					))}
@@ -56,9 +59,9 @@ function Hamburger({ open }: Readonly<{ open: boolean }>) {
 
 	return (
 		<div className="w-6 h-5 flex flex-col justify-between items-center">
-			<div className={clsx("w-full h-1 bg-gray-800 transition-transform duration-300", { "transform rotate-45 translate-y-2": open })}></div>
-			<div className={clsx("w-full h-1 bg-gray-800 transition-opacity duration-300", { "opacity-0": open })}></div>
-			<div className={clsx("w-full h-1 bg-gray-800 transition-transform duration-300", { "transform -rotate-45 -translate-y-2": open })}></div>
+			<div className={clsx("w-full h-1 bg-current transition-transform duration-300", { "transform rotate-45 translate-y-2": open })}></div>
+			<div className={clsx("w-full h-1 bg-current transition-opacity duration-300", { "opacity-0": open })}></div>
+			<div className={clsx("w-full h-1 bg-current transition-transform duration-300", { "transform -rotate-45 -translate-y-2": open })}></div>
 		</div>
 	);
 }
