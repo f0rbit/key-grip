@@ -1,11 +1,24 @@
+import FontSwitcher from "@/components/font-switcher";
 import { SocialIcons } from "@/components/socials";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+
+    const fonts = [
+    "Arial, sans-serif",
+    "Georgia, serif",
+    "'Courier New', monospace",
+    "'Tahoma', sans-serif",
+    "'Verdana', sans-serif",
+  ];
+  const text = "Key Grip";
+  const interval = 200; // Change font every 1 second
+
+
   return (
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
 		{/* <h1>Key Grip</h1> */}
+        <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
 		<section className="absolute bottom-6 left-6 grid gap-2">
 			<EPLink label="NEW EP" href="/ep2" year="2024" />
