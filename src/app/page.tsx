@@ -16,7 +16,7 @@ export default function Home() {
         scurlock.className,
   ];
   const text = "Key Grip";
-  const interval = 1000; // Change font every 1 second
+  const interval = 150; // Change font every 1 second
 
 
   return (
