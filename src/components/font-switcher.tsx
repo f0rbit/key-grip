@@ -1,4 +1,5 @@
 'use client';
+import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 interface FontSwitcherProps {
@@ -24,8 +25,8 @@ const FontSwitcher = ({ text, fonts, interval }: FontSwitcherProps) => {
   return (
     <div className="flex flex-col items-center justify-center h-0">
       <p
-        className="text-xl transition-all duration-300 ease-in-out"
-        style={{ fontFamily: currentFont }}
+        className={cn("text-xl transition-all duration-300 ease-in-out", currentFont)}
+
       >
         {text}
       </p>

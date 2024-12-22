@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { BurgerBar, BurgerProvider } from "@/components/burger-bar";
+import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -27,10 +28,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-50 dark:bg-neutral-900`}>
+			<body className={cn(geistSans.variable, geistMono.variable)}>
 				<BurgerProvider>
 					<BurgerBar />
-					<main>
+					<main className="white-felt">
 						{children}
 					</main>
 				</BurgerProvider>

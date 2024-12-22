@@ -1,18 +1,22 @@
 import FontSwitcher from "@/components/font-switcher";
 import { SocialIcons } from "@/components/socials";
+import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from "@/lib/fonts";
 import Link from "next/link";
 
 export default function Home() {
 
-    const fonts = [
-    "Arial, sans-serif",
-    "Georgia, serif",
-    "'Courier New', monospace",
-    "'Tahoma', sans-serif",
-    "'Verdana', sans-serif",
+  const fonts = [
+        adramalech.className,
+        albemarle.className,
+        celticsea.className,
+        durendal.className,
+        fuse.className,
+        minima.className,
+        norumbega.className,
+        scurlock.className,
   ];
   const text = "Key Grip";
-  const interval = 200; // Change font every 1 second
+  const interval = 1000; // Change font every 1 second
 
 
   return (
