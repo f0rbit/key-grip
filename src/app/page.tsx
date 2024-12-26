@@ -25,7 +25,7 @@ export default function Home() {
 		{/* <h1>Key Grip</h1> */}
         <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
-        <section className="fixed top-0 left-[25vw] grid gap-2">
+        <section className="fixed -top-2 left-[25vw] grid gap-2">
            <WindChimes/>
         </section>
 

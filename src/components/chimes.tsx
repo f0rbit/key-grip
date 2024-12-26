@@ -9,18 +9,23 @@ const WindChimes = () => {
     { id: 4, sound: "chime4.mp3" },
   ];
 
-  const [lastMouseX, setLastMouseX] = useState(null);
+  const [lastMouseX, setLastMouseX] = useState<number>(0);
 
-  const handleHover = (sound, event) => {
+  const updateMousePosition = (event: any) => {
+    setLastMouseX(event.clientX);
+  };
+
+  const handleHover = (sound: string, event: any) => {
     const chime = event.currentTarget;
 
     // Determine the mouse direction
     const currentMouseX = event.clientX;
-    const direction = currentMouseX > (lastMouseX || 0) ? 1 : -1;
-    setLastMouseX(currentMouseX);
+    const direction = currentMouseX > (lastMouseX || 0) ? -1 : 1;
+
+    const sway = Math.random() * 15 + 5;
 
     // Apply sway based on direction
-    chime.style.transform = `rotate(${direction * 15}deg)`;
+    chime.style.transform = `rotate(${direction * sway}deg)`;
 
     // Play the sound
     const audio = new Audio(sound);
@@ -29,16 +34,17 @@ const WindChimes = () => {
     // Reset after animation
     setTimeout(() => {
       chime.style.transform = "rotate(0deg)";
-    }, 300);
+    }, Math.random() * 100 + 100);
   };
 
   return (
-    <div className="flex justify-center items-start space-x-4">
+    <div className="flex justify-center items-start gap-3">
       {chimes.map((chime) => (
         <div
           key={chime.id}
-          className="w-2 h-24 bg-gradient-to-b from-blue-300 to-blue-600 rounded hover:cursor-pointer transition-transform duration-300"
+          className="w-2 h-24 bg-neutral-600 rounded hover:cursor-pointer transition-transform duration-300"
           onMouseEnter={(event) => handleHover(chime.sound, event)}
+          onMouseMove={(event) => updateMousePosition(event)}
         ></div>
       ))}
     </div>
