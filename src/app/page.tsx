@@ -1,3 +1,4 @@
+import WindChimes from "@/components/chimes";
 import FontSwitcher from "@/components/font-switcher";
 import { SocialIcons } from "@/components/socials";
 import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from "@/lib/fonts";
@@ -23,6 +24,10 @@ export default function Home() {
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
 		{/* <h1>Key Grip</h1> */}
         <FontSwitcher text={text} fonts={fonts} interval={interval} />
+
+        <section className="fixed top-0 left-[25vw] grid gap-2">
+           <WindChimes/>
+        </section>
 
 		<section className="absolute bottom-6 left-6 grid gap-2">
 			<EPLink label="NEW EP" href="/ep2" year="2024" />
