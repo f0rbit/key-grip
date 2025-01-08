@@ -26,7 +26,7 @@ export default function Home() {
         <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
         <section className="fixed -top-2 left-[25vw] grid gap-2">
-           <WindChimes/>
+           <WindChimes/> 
         </section>
 
 		<section className="absolute bottom-6 left-6 grid gap-2">

@@ -1,6 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { createContext, useContext, useState } from "react";
+import { SocialIcons } from "./socials";
 
 // create open/close context for burger bar
 export const BurgerContext = createContext({
@@ -12,6 +13,7 @@ const MENU_LINKS = [
 	{ label: "Home", href: "/" },
 	{ label: "About", href: "/about" },
 	{ label: "Contact", href: "/contact" },
+	{ label: "Links", href: "/links"},
 ];
 
 export function BurgerProvider({ children }: Readonly<{ children: React.ReactNode }>) {
