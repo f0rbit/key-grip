@@ -4,49 +4,91 @@ import React from 'react';
 import { Music, Instagram, Globe, Mail } from 'lucide-react';
 import Image from 'next/image';
 
+
+
+const SpotifyLogo = () => (
+  <img 
+    src="photos/Spotify_Primary_Logo_RGB_White.png" 
+    alt="Music" 
+    className="w-6 h-6"
+  />
+)
+
+const AppleMusicLogo = () => (
+  <img 
+    src="photos/Apple_Music_icon.png" 
+    alt="Music" 
+    className="w-6 h-6"
+  />
+)
+
+const Bandcamplogo = () => (
+  <img 
+    src="photos/bandcamp-icon.png" 
+    alt="Music" 
+    className="w-6 h-6"
+  />
+)
+
+const InstagramLogo = () => (
+  <img
+    src='photos/Instagram_icon.png'
+    alt="Instagram"
+    className='w-6 h-6'
+  />
+)
+
+const TikTokLogo = () => (
+  <img
+    src='photos/tiktok_logo.webp'
+    alt="Instagram"
+    className='w-6 h-6'
+  />
+)
+
 const MusicianLandingPage = () => {
   const links = [
     {
       title: 'Spotify',
       url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320',
-      icon: <Music className="w-6 h-6" />,
-      color: 'bg-green-500'
+      icon: <SpotifyLogo />,
+      color: 'bg-green-500 text-white'
     },
     {
       title: 'Apple Music',
       url: 'https://music.apple.com/au/artist/key-grip/1670242625',
-      icon: <Music className="w-6 h-6" />,
-      color: 'bg-rose-500'
+      icon: <AppleMusicLogo />,
+      color: 'bg-rose-500 text-white'
     },
     {
-      title: 'DistroKid',
+      title: 'Bandcamp',
       url: 'https://keygripmusic.bandcamp.com/',
-      icon: <Music className="w-6 h-6" />,
-      color: 'bg-yellow-500'
+      icon: <Bandcamplogo />,
+      color: 'bg-blue-500 text-white'
     },
     {
       title: 'Instagram',
       url: 'https://www.instagram.com/keygripmusic/',
-      icon: <Instagram className="w-6 h-6" />,
-      color: 'bg-purple-500'
+      icon: <InstagramLogo />,
+      color: 'bg-purple-500 text-white'
     },
     {
       title: 'TikTok',
       url: 'https://www.tiktok.com/@keygripmusicvstheworld',
-      icon: <Instagram className="w-6 h-6" />,
-      color: 'bg-blue-500'
+      icon: <TikTokLogo />,
+      color: 'bg-slate-950 text-white'
     },
     {
       title: 'Website',
       url: 'https://your-website.com',
       icon: <Globe className="w-6 h-6" />,
-      color: 'bg-gray-500'
+      color: 'bg-gray-500 text-white'
     },
     {
       title: 'Contact',
       url: 'mailto:your-email@example.com',
       icon: <Mail className="w-6 h-6" />,
-      color: 'bg-indigo-500'
+      color: 'bg-indigo-500 text-white'
     }
   ];
 
@@ -59,7 +101,7 @@ const MusicianLandingPage = () => {
     <div 
       className="min-h-screen bg-cover bg-center bg-fixed relative"
       style={{
-        backgroundImage: "url('/photos/big_ceiling.jpg')"  // Put your background image in public folder
+        backgroundImage: "url('/photos/KG_Banner.png')"  // Put your background image in public folder
       }}
     >
       {/* Dark overlay for better readability */}
@@ -72,7 +114,7 @@ const MusicianLandingPage = () => {
           <div className="text-center mb-12">
             <div className="relative w-32 h-32 mx-auto mb-4">
               <Image
-                src="/photos/Keygrip_webpage_image.jpg"
+                src="/photos/KG_profile.jpg"
                 alt="Artist Profile"
                 fill
                 className="rounded-full border-4 border-white object-cover"
