@@ -7,14 +7,14 @@ import Link from "next/link";
 export default function Home() {
 
   const fonts = [
-        adramalech.className + " text-[2rem]",
-        albemarle.className + " text-[2.3rem]",
-        celticsea.className + " text-[2.7rem]",
-        durendal.className + " text-[1.7rem]",
-        fuse.className + " text-[2.4rem]",
-        minima.className + " text-[3.1rem]",
-        norumbega.className + " text-[2rem]",
-        scurlock.className + " text-[2.4rem]",
+        adramalech.className + " text-[4rem]",
+        albemarle.className + " text-[4.6rem]",
+        celticsea.className + " text-[5.4rem]",
+        durendal.className + " text-[3.4rem]",
+        fuse.className + " text-[4.8rem]",
+        minima.className + " text-[6.2rem]",
+        norumbega.className + " text-[4rem]",
+        scurlock.className + " text-[4.6rem]",
   ];
   const text = "Key Grip";
   const interval = 150; // Change font every 1 second
