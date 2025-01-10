@@ -101,12 +101,10 @@ const MusicianLandingPage = () => {
     <div 
       className="min-h-screen bg-cover bg-center bg-fixed relative"
       style={{
-        backgroundImage: "url('/photos/KG_Banner.png')"  // Put your background image in public folder
+        backgroundImage: "url('/photos/KG_Banner.png')"  
       }}
     >
-      {/* Dark overlay for better readability */}
-      <div className="absolute inset-0 bg-black/50"></div>
-      
+            
       {/* Content */}
       <div className="relative z-10 py-16 px-4">
         <div className="max-w-2xl mx-auto">
