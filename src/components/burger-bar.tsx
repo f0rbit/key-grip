@@ -21,6 +21,8 @@ const BURGER_COLOUR = {
   '/about': 'dark',
   '/contact': 'dark',
   '/links': 'light',
+  '/ep1': 'light',
+  '/ep2': 'light'
 } as const;
 
 type PageRoot = keyof typeof BURGER_COLOUR;
