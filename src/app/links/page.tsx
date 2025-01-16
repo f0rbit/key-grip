@@ -7,25 +7,25 @@ import Image from 'next/image';
 
 
 const SpotifyLogo = () => (
-  <img 
-    src="photos/Spotify_Primary_Logo_RGB_White.png" 
-    alt="Music" 
+  <img
+    src="photos/Spotify_Primary_Logo_RGB_White.png"
+    alt="Music"
     className="w-6 h-6"
   />
 )
 
 const AppleMusicLogo = () => (
-  <img 
-    src="photos/Apple_Music_icon.png" 
-    alt="Music" 
+  <img
+    src="photos/Apple_Music_icon.png"
+    alt="Music"
     className="w-6 h-6"
   />
 )
 
 const Bandcamplogo = () => (
-  <img 
-    src="photos/bandcamp-icon.png" 
-    alt="Music" 
+  <img
+    src="photos/bandcamp-icon.png"
+    alt="Music"
     className="w-6 h-6"
   />
 )
@@ -98,13 +98,14 @@ const MusicianLandingPage = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-cover bg-center bg-fixed relative"
       style={{
-        backgroundImage: "url('/photos/KG_Banner.png')"  
+        backgroundImage: "url('/photos/KG_Banner.png')"
       }}
     >
-            
+      <div className="absolute inset-0 bg-black/40"></div>
+
       {/* Content */}
       <div className="relative z-10 py-16 px-4">
         <div className="max-w-2xl mx-auto">
@@ -120,7 +121,7 @@ const MusicianLandingPage = () => {
               />
             </div>
             <h1 className="text-3xl font-bold mb-2 text-white">Key Grip</h1>
-            <p className="text-gray-200">Hi!!!! Please listen to our music!!!!!</p>
+            <p className="text-white drop-shadow-sm">Hi!!!! Please listen to our music!!!!!</p>
           </div>
 
           {/* Links Section */}
