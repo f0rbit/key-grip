@@ -96,6 +96,7 @@ body {
 }
 
 
+/*
 body::after{
   content: "";
   background-color: #ffffffcc;
@@ -111,4 +112,4 @@ body::after{
   mix-blend-mode: luminosity;
   pointer-events: none;
   z-index: 100;
-}
+}*/
