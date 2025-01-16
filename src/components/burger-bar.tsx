@@ -1,5 +1,6 @@
 "use client";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
 // create open/close context for burger bar
@@ -15,6 +16,15 @@ const MENU_LINKS = [
   { label: "Links", href: "/links" },
 ];
 
+const BURGER_COLOUR = {
+  '/': 'dark',
+  '/about': 'dark',
+  '/contact': 'dark',
+  '/links': 'light',
+} as const;
+
+type PageRoot = keyof typeof BURGER_COLOUR;
+
 export function BurgerProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [open, setOpen] = useState(false);
 
@@ -28,10 +38,30 @@ export function BurgerProvider({ children }: Readonly<{ children: React.ReactNod
 export function BurgerBar() {
   const { open, toggle } = useContext(BurgerContext);
 
+  const burger_colours = {
+    'dark': {
+      open: "text-neutral-200",
+      closed: 'text-neutral-900',
+    },
+    'light': {
+      open: "text-neutral-200",
+      closed: 'text-neutral-200',
+    }
+  }
+
+  // get the first /<path> from the url using enxtjs
+  const pathname = usePathname();
+  const link_part = "/" + pathname.split('/')[1] as PageRoot;
+  const colour = BURGER_COLOUR[link_part];
+
+  console.log({ pathname, link_part, colour });
+
+
   return (
     <>
-      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501]", open ? `text-neutral-200 dark:text-neutral-900` : `text-neutral-900 dark:text-neutral-200`)}>
-        <div onClick={toggle} className="w-12 h-12 flex flex-col justify-between items-center">
+      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501]", burger_colours[colour][open ? "open" : "closed"])} onClick={toggle}>
+
+        <div className="w-12 h-12 flex flex-col justify-between items-center">
           <Hamburger open={open} />
         </div>
         <p>{open ? "Close" : "Menu"}</p>
