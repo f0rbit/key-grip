@@ -8,27 +8,104 @@ const AudioPlayer = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [bgColor, setBgColor] = useState('#1a1a1a');
-  const [prevBgColor, setPrevBgColor] = useState('#1a1a1a');
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState(new Set());
   const audioRef = useRef(null);
+  const LOADING_PLACEHOLDER = '/photos/Ep1_coverArt.png';
 
   const tracks = [
-    { id: 1, title: "Kalybaba", src: "/music/Kalybaba.wav", color: "#2C3E50" },
-    { id: 2, title: "Orbit", src: "/music/Orbit.wav", color: "#8E44AD" },
-    { id: 3, title: "Razed Edge", src: "/music/Razed_Edge.wav", color: "#E74C3C" },
-    { id: 4, title: "Beginning To Forget", src: "/music/beginning_to_forget.wav", color: "#2980B9" },
-    { id: 5, title: "Acoustiic", src: "/music/Acoustiic.wav", color: "#27AE60" },
-    { id: 6, title: "No Build", src: "/music/No_Build.wav", color: "#F39C12" }
+    { 
+      id: 1, 
+      title: "Kalybaba", 
+      src: "/music/Kalybaba.wav", 
+      backgroundImage: "/photos/big_ceiling.jpg"
+    },
+    { 
+      id: 2, 
+      title: "Orbit", 
+      src: "/music/Orbit.wav", 
+      backgroundImage: "/photos/KG_Background.png"
+    },
+    { 
+      id: 3, 
+      title: "Razed Edge", 
+      src: "/music/Razed_Edge.wav", 
+      backgroundImage: "/photos/big_ceiling.jpg"
+    },
+    { 
+      id: 4, 
+      title: "Beginning To Forget", 
+      src: "/music/beginning_to_forget.wav", 
+      backgroundImage: "/photos/KG_Background.png"
+    },
+    { 
+      id: 5, 
+      title: "Acoustiic", 
+      src: "/music/Acoustiic.wav", 
+      backgroundImage: "/photos/big_ceiling.jpg"
+    },
+    { 
+      id: 6, 
+      title: "No Build", 
+      src: "/music/No_Build.wav", 
+      backgroundImage: "/photos/KG_Background.png"
+    }
   ];
 
   const currentTrack = tracks[currentTrackIndex];
 
+  // Preload function for a single image
+  const preloadImage = (src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages(prev => new Set([...prev, src]));
+        resolve();
+      };
+      img.onerror = reject;
+    });
+  };
+
+  // Initial preload of images
   useEffect(() => {
-    setPrevBgColor(bgColor);
-    setBgColor(tracks[currentTrackIndex].color);
+    const preloadInitialImages = async () => {
+      try {
+        // Preload placeholder
+        await preloadImage(LOADING_PLACEHOLDER);
+        
+        // Preload current and next image
+        await preloadImage(tracks[currentTrackIndex].backgroundImage);
+        if (currentTrackIndex < tracks.length - 1) {
+          await preloadImage(tracks[currentTrackIndex + 1].backgroundImage);
+        }
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+    };
+
+    preloadInitialImages();
+  }, []);
+
+  // Preload next image when track changes
+  useEffect(() => {
+    const preloadNextImage = async () => {
+      setIsImageLoading(true);
+      try {
+        await preloadImage(currentTrack.backgroundImage);
+        // Preload next track's image
+        const nextIndex = (currentTrackIndex + 1) % tracks.length;
+        preloadImage(tracks[nextIndex].backgroundImage).catch(console.error);
+      } catch (error) {
+        console.error('Error preloading next image:', error);
+      }
+      setIsImageLoading(false);
+    };
+
+    preloadNextImage();
   }, [currentTrackIndex]);
 
-  // New effect to handle auto-play when track changes
+  // Auto-play handling
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.play()
@@ -80,13 +157,26 @@ const AudioPlayer = () => {
     setCurrentTime(0);
   };
 
+  const getBackgroundStyles = () => {
+    const currentImage = loadedImages.has(currentTrack.backgroundImage) 
+      ? currentTrack.backgroundImage 
+      : LOADING_PLACEHOLDER;
+
+    return {
+      backgroundImage: `url(${currentImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      opacity: isImageLoading ? '0.8' : '1',
+      transition: 'opacity 0.3s ease-in-out, background-image 0.3s ease-in-out'
+    };
+  };
+
   return (
-	<div 
-	className="min-h-screen flex flex-col items-center justify-center gap-8 transition-colors duration-1000"
-	style={{ backgroundColor: bgColor }}
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center gap-8 transition-all duration-1000"
+      style={getBackgroundStyles()}
     >
-      {/* Player Card */}
-      <div className="w-full max-w-md p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg mb-4">
+      <div className="w-full max-w-md p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg mb-8">
         <h3 className="text-2xl font-medium text-center mb-6 text-white">{currentTrack.title}</h3>
         
         <audio
@@ -143,7 +233,6 @@ const AudioPlayer = () => {
         </div>
       </div>
 
-      {/* Track List */}
       <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden">
         {tracks.map((track, index) => (
           <button
