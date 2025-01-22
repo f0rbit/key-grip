@@ -13,8 +13,6 @@ export const BurgerContext = createContext({
 
 const MENU_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
   { label: "Links", href: "/links" },
 ];
 
