@@ -7,7 +7,7 @@ const LINKS = [
 	{ label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/yourhandle" },
 	{ label: "Spotify", icon: <Spotify />, href: "https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl" },
 	{ label: "Apple Music", icon: <AppleMusic />, href: "https://music.apple.com/artist/key-grip/1670242625" },
-	{ label: "YouTube", icon: <Youtube size={20} />, href: "https://youtube.com/c/yourhandle" },
+	{ label: "YouTube", icon: <Youtube size={20} />, href: "https://www.youtube.com/@keygripmusic" },
 ];
 
 
