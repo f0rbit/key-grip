@@ -1,9 +1,17 @@
 import clsx from "clsx";
-import { Instagram, Twitter, Youtube } from "lucide-react";
+import { Instagram, Twitter, Youtube } from "lucide-react"; 
 import Image from "next/image";
 
+const WhiteBandcamplogo = () => (
+	<img
+	  src="/photos/white_bandcamp_icon.png"
+	  alt="Music"
+	  className="w-9 h-9"
+	/>
+  )
+
 const LINKS = [
-  { label: "Twitter", icon: <Twitter size={20} />, href: "https://twitter.com/yourhandle" },
+  { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/yourhandle" },
   { label: "Spotify", icon: <Spotify />, href: "https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl" },
   { label: "Apple Music", icon: <AppleMusic />, href: "https://music.apple.com/artist/key-grip/1670242625" },
