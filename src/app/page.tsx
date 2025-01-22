@@ -1,11 +1,11 @@
 import WindChimes from "@/components/chimes";
 import FontSwitcher from "@/components/font-switcher";
 import { SocialIcons } from "@/components/socials";
+import VideoBackground from '@/components/VideoBackground';
 import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from "@/lib/fonts";
 import Link from "next/link";
 
 export default function Home() {
-
   const fonts = [
     adramalech.className + " text-[4rem]",
     albemarle.className + " text-[4.6rem]",
@@ -17,12 +17,11 @@ export default function Home() {
     scurlock.className + " text-[4.6rem]",
   ];
   const text = "Key Grip";
-  const interval = 150; // Change font every 1 second
-
+  const interval = 150;
 
   return (
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
-      {/* <h1>Key Grip</h1> */}
+      <VideoBackground videoPath="/videos/walkingVid.mp4" />
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
       <section className="absolute bottom-6 right-0 grid gap-2 w-screen">
