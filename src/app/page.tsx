@@ -20,35 +20,14 @@ export default function Home() {
   const interval = 150;
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
+    <div className="flex w-screen h-screen justify-center items-center relative text-neutral-50">
       <VideoBackground videoPath="/videos/walkingVid.mp4" />
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
-      <section className="fixed -top-2 left-[25vw] grid gap-2">
-        <WindChimes/> 
-      </section>
-
-      <section className="absolute bottom-6 left-6 grid gap-2">
-        <EPLink label="NEW EP" href="/ep2" year="2024" />
-        <EPLink label="Key Grip...?" href="/ep1" year="2023" />
-        <br />
-      </section>
-
-      <section className="absolute bottom-6 right-6 grid gap-2">
+      <section className="absolute bottom-6 right-0 grid gap-2 w-screen">
         <SocialIcons direction="row" />
       </section>
     </div>
   );
 }
 
-function EPLink({ label, href, year }: Readonly<{ label: string; href: string; year: string }>) { 
-
-	return (
-		<Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-all duration-300 origin-left group">
-			<h3 className="transition-all duration-300 text-2xl font-bold text-neutral-800 dark:text-neutral-200 dark:group-hover:text-neutral-50">
-				{label}
-			</h3>
-			<p className="transition-all duration-300 text-neutral-500 dark:text-neutral-400 dark:group-hover:text-neutral-300">{year}</p>
-		</Link>
-	);
-}
