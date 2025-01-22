@@ -29,8 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(geistSans.variable, geistMono.variable)}>
         <BurgerProvider>
-          <BurgerBar />
-          <main className="white-felt">
+          <main>
             {children}
           </main>
         </BurgerProvider>

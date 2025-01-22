@@ -23,7 +23,7 @@ export function SocialIcons({ direction }: { direction: "row" | "col" }) {
   return (
     <div className={clsx("flex items-center justify-center", direction === "col" ? "flex-col" : "flex-row", "social-links")}>
       {LINKS.map(({ label, icon, href }) => (
-        <a aria-roledescription="button" title={label} key={label} href={href} target="_blank" rel="noopener noreferrer" className="p-2 hover:scale-110 duration-300 text-neutral-300 hover:text-neutral-100">
+        <a aria-roledescription="button" title={label} key={label} href={href} target="_blank" rel="noopener noreferrer" className="p-2 hover:scale-110 duration-300 text-neutral-200 hover:text-neutral-50">
           {icon}
         </a>
       ))}

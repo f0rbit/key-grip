@@ -1,3 +1,4 @@
+import { BurgerBar } from "@/components/burger-bar";
 import WindChimes from "@/components/chimes";
 import FontSwitcher from "@/components/font-switcher";
 import { SocialIcons } from "@/components/socials";
@@ -21,10 +22,11 @@ export default function Home() {
 
   return (
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-50">
+      <BurgerBar />
       <VideoBackground videoPath="/videos/walkingVid.mp4" />
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
-      <section className="absolute bottom-6 right-0 grid gap-2 w-screen">
+      <section className="absolute bottom-6 right-0 grid gap-2 w-screen drop-shadow-md">
         <SocialIcons direction="row" />
       </section>
     </div>
