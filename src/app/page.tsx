@@ -25,7 +25,7 @@ export default function Home() {
       {/* <h1>Key Grip</h1> */}
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
-      <section className="absolute bottom-6 right-6 grid gap-2">
+      <section className="absolute bottom-6 right-0 grid gap-2 w-screen">
         <SocialIcons direction="row" />
       </section>
     </div>

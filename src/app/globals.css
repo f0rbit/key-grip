@@ -89,6 +89,6 @@ body {
   }
 
   .social-links svg {
-    @apply h-8 w-8 md:w-10 md:h-10;
+    @apply h-8 w-8 md:w-10 md:h-10 max-w-[6vw] max-h-[6vw];
   }
 }
