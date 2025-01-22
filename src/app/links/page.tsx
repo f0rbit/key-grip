@@ -3,6 +3,7 @@
 import React from 'react';
 import { Music, Instagram, Globe, Mail } from 'lucide-react';
 import Image from 'next/image';
+import { EPLink } from '@/components/burger-bar';
 
 
 
@@ -104,6 +105,9 @@ const MusicianLandingPage = () => {
         backgroundImage: "url('/photos/KG_Banner.png')"
       }}
     >
+      <nav className="fixed top-4 px-10 text-neutral-50 text-2xl z-[500] h-10 drop-shadow-md">
+        <EPLink label="Home" href="/" />
+      </nav>
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Content */}
