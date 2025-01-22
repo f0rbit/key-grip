@@ -37,7 +37,7 @@ export function BurgerBar() {
 
   return (
     <>
-      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501] text-neutral-900")} onClick={toggle}>
+      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501]")} onClick={toggle}>
         <div className="w-12 h-12 flex flex-col justify-between items-center">
           <Hamburger open={open} />
         </div>
