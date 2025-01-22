@@ -1,7 +1,6 @@
 "use client";
 import clsx from "clsx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
 // create open/close context for burger bar
@@ -37,7 +36,7 @@ export function BurgerBar() {
 
   return (
     <>
-      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501]")} onClick={toggle}>
+      <button className={clsx("fixed top-6 left-6 cursor-pointer flex flex-row gap-1 z-[501] text-neutral-50")} onClick={toggle}>
         <div className="w-12 h-12 flex flex-col justify-between items-center">
           <Hamburger open={open} />
         </div>
@@ -45,7 +44,7 @@ export function BurgerBar() {
       </button>
       <nav
         style={{ transition: open ? `opacity 250ms ease, left 0ms 0ms ease` : `opacity 250ms ease, left 0ms 250ms ease` }}
-        className={clsx("flex flex-col gap-2 fixed top-0 h-screen w-screen bg-neutral-50 z-[500]", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
+        className={clsx("flex flex-col gap-2 fixed top-0 h-screen w-screen bg-neutral-900 text-neutral-50 z-[500]", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
       >
         <div className="h-24"></div>
         <div className="grid gap-2 px-8 justify-center">
@@ -85,10 +84,10 @@ function EPLink({ label, href, year }: Readonly<{ label: string; href: string; y
 
   return (
     <Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-all duration-300 origin-left group" onClick={() => setOpen(false)}>
-      <h3 className="transition-all duration-300 text-2xl font-bold text-neutral-800 dark:text-neutral-200 dark:group-hover:text-neutral-50">
+      <h3 className="transition-all duration-300 text-2xl font-bold">
         {label}
       </h3>
-      {year && <p className="transition-all duration-300 text-neutral-500 dark:text-neutral-400 dark:group-hover:text-neutral-300">{year}</p>}
+      {year && <p className="transition-all duration-300">{year}</p>}
     </Link>
   );
 }

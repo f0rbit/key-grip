@@ -20,7 +20,7 @@ export default function Home() {
   const interval = 150;
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center relative text-neutral-900">
+    <div className="flex w-screen h-screen justify-center items-center relative text-neutral-50">
       <VideoBackground videoPath="/videos/walkingVid.mp4" />
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
