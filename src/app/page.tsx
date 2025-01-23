@@ -24,6 +24,8 @@ export default function Home() {
     <div className="flex w-screen h-screen justify-center items-center relative text-neutral-50">
       <BurgerBar />
       <VideoBackground videoPath="/videos/walkingVid.mp4" />
+
+      <div className="absolute inset-0 bg-black/10 -z-10"></div>
       <FontSwitcher text={text} fonts={fonts} interval={interval} />
 
       <section className="absolute bottom-6 right-0 grid gap-2 w-screen drop-shadow-md">

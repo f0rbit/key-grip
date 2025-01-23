@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { BurgerBar } from '@/components/burger-bar';
 
 const AudioPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -14,40 +15,40 @@ const AudioPlayer = () => {
   const LOADING_PLACEHOLDER = '/photos/Ep1_coverArt.png';
 
   const tracks = [
-    { 
-      id: 1, 
-      title: "Kalybaba", 
-      src: "/music/Kalybaba.wav", 
+    {
+      id: 1,
+      title: "Kalybaba",
+      src: "/music/Kalybaba.wav",
       backgroundImage: "/photos/big_ceiling.jpg"
     },
-    { 
-      id: 2, 
-      title: "Orbit", 
-      src: "/music/Orbit.wav", 
+    {
+      id: 2,
+      title: "Orbit",
+      src: "/music/Orbit.wav",
       backgroundImage: "/photos/KG_Background.png"
     },
-    { 
-      id: 3, 
-      title: "Razed Edge", 
-      src: "/music/Razed_Edge.wav", 
+    {
+      id: 3,
+      title: "Razed Edge",
+      src: "/music/Razed_Edge.wav",
       backgroundImage: "/photos/big_ceiling.jpg"
     },
-    { 
-      id: 4, 
-      title: "Beginning To Forget", 
-      src: "/music/beginning_to_forget.wav", 
+    {
+      id: 4,
+      title: "Beginning To Forget",
+      src: "/music/beginning_to_forget.wav",
       backgroundImage: "/photos/KG_Background.png"
     },
-    { 
-      id: 5, 
-      title: "Acoustiic", 
-      src: "/music/Acoustiic.wav", 
+    {
+      id: 5,
+      title: "Acoustiic",
+      src: "/music/Acoustiic.wav",
       backgroundImage: "/photos/big_ceiling.jpg"
     },
-    { 
-      id: 6, 
-      title: "No Build", 
-      src: "/music/No_Build.wav", 
+    {
+      id: 6,
+      title: "No Build",
+      src: "/music/No_Build.wav",
       backgroundImage: "/photos/KG_Background.png"
     }
   ];
@@ -73,7 +74,7 @@ const AudioPlayer = () => {
       try {
         // Preload placeholder
         await preloadImage(LOADING_PLACEHOLDER);
-        
+
         // Preload current and next image
         await preloadImage(tracks[currentTrackIndex].backgroundImage);
         if (currentTrackIndex < tracks.length - 1) {
@@ -158,8 +159,8 @@ const AudioPlayer = () => {
   };
 
   const getBackgroundStyles = () => {
-    const currentImage = loadedImages.has(currentTrack.backgroundImage) 
-      ? currentTrack.backgroundImage 
+    const currentImage = loadedImages.has(currentTrack.backgroundImage)
+      ? currentTrack.backgroundImage
       : LOADING_PLACEHOLDER;
 
     return {
@@ -172,13 +173,15 @@ const AudioPlayer = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col items-center justify-center gap-8 transition-all duration-1000"
-      style={getBackgroundStyles()}
+    <div
+      className="min-h-screen flex flex-col items-center justify-center gap-8"
     >
+      <div className="fixed top-0 left-0 w-screen h-screen -z-10 overflow-hidden duration-1000 transition-all" style={getBackgroundStyles()} />
+      <BurgerBar />
+      <div className="absolute inset-0 bg-black/40 -z-10"></div>
       <div className="w-full max-w-md p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg mb-8">
         <h3 className="text-2xl font-medium text-center mb-6 text-white">{currentTrack.title}</h3>
-        
+
         <audio
           ref={audioRef}
           src={currentTrack.src}
@@ -186,7 +189,7 @@ const AudioPlayer = () => {
           onLoadedMetadata={handleLoadedMetadata}
           className="hidden"
         />
-        
+
         <div className="space-y-4">
           <input
             type="range"
@@ -195,35 +198,35 @@ const AudioPlayer = () => {
             onChange={handleSeek}
             className="w-full h-2 bg-white/30 rounded-lg appearance-none cursor-pointer"
           />
-          
+
           <div className="flex justify-between text-sm text-white">
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration)}</span>
           </div>
-          
+
           <div className="flex items-center justify-center space-x-4">
-            <button 
-              onClick={() => skip(-10)} 
+            <button
+              onClick={() => skip(-10)}
               className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
             >
               <SkipBack size={20} />
             </button>
-            
-            <button 
+
+            <button
               onClick={togglePlay}
               className="p-4 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors"
             >
               {isPlaying ? <Pause size={28} /> : <Play size={28} />}
             </button>
-            
-            <button 
+
+            <button
               onClick={() => skip(10)}
               className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
             >
               <SkipForward size={20} />
             </button>
-            
-            <button 
+
+            <button
               onClick={toggleMute}
               className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
             >
@@ -238,11 +241,10 @@ const AudioPlayer = () => {
           <button
             key={track.id}
             onClick={() => selectTrack(index)}
-            className={`w-full p-4 text-left hover:bg-white/20 transition-colors ${
-              currentTrackIndex === index 
-                ? 'bg-white/30 font-medium' 
+            className={`w-full p-4 text-left hover:bg-white/20 transition-colors ${currentTrackIndex === index
+                ? 'bg-white/30 font-medium'
                 : 'text-white/80'
-            }`}
+              }`}
           >
             <span className="text-white">{track.title}</span>
           </button>
