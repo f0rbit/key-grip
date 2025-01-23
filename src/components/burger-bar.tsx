@@ -103,11 +103,11 @@ export function EPLink({ label, href, year }: Readonly<{ label: string; href: st
   const { setOpen } = useContext(BurgerContext);
 
   return (
-    <Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-all duration-300 origin-center group" onClick={() => setOpen(false)}>
-      <h3 className="transition-all duration-300 font-bold">
+    <Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-transform duration-300 origin-center group" onClick={() => setOpen(false)}>
+      <h3 className="font-bold">
         {label}
       </h3>
-      {year && <p className="transition-all duration-300 scale-75 opacity-75 origin-left">{year}</p>}
+      {year && <p className="scale-75 opacity-75 origin-left">{year}</p>}
     </Link>
   );
 }
