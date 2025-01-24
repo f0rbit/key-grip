@@ -35,7 +35,7 @@ export function BurgerBar() {
 
 
   return (
-    <div className="fixed top-0 left-0">
+    <div className="absolute top-0 left-0">
       <div className="hidden md:flex">
         <nav
           className={clsx("flex flex-row gap-2 fixed top-4 h-10 w-screen text-neutral-50 z-[500] justify-between px-10 text-2xl drop-shadow-md")}
@@ -59,11 +59,10 @@ export function BurgerBar() {
           <div className="w-12 h-12 flex flex-col justify-between items-center">
             <Hamburger open={open} />
           </div>
-          <p>{open ? "Close" : "Menu"}</p>
         </button>
         <nav
           style={{ transition: open ? `opacity 250ms ease, left 0ms 0ms ease` : `opacity 250ms ease, left 0ms 250ms ease` }}
-          className={clsx("flex flex-col gap-2 fixed top-0 h-screen w-screen bg-neutral-900 text-neutral-50 z-[500]", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
+          className={clsx("flex flex-col gap-2 fixed top-0 h-screen w-screen bg-neutral-900 text-neutral-50 z-[500] text-3xl", open ? "left-0 opacity-1" : "-left-[100vw] lg:-left-[20vw] opacity-0")}
         >
           <div className="h-24"></div>
           <div className="grid gap-2 px-8 justify-center">
