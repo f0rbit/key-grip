@@ -1,126 +1,71 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Download } from 'lucide-react';
+import "../../../components/audio-player.css"
 
 const AudioPlayer = () => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isImageLoading, setIsImageLoading] = useState(true);
-  const [loadedImages, setLoadedImages] = useState(new Set());
   const audioRef = useRef(null);
-  const LOADING_PLACEHOLDER = '/photos/Ep1_coverArt.png';
 
   const tracks = [
-    { 
-      id: 1, 
-      title: "Kalybaba", 
-      src: "/music/Kalybaba.wav", 
-      backgroundImage: "/photos/big_ceiling.jpg"
-    },
-    { 
-      id: 2, 
-      title: "Orbit", 
-      src: "/music/Orbit.wav", 
-      backgroundImage: "/photos/KG_Background.png"
-    },
-    { 
-      id: 3, 
-      title: "Razed Edge", 
-      src: "/music/Razed_Edge.wav", 
-      backgroundImage: "/photos/big_ceiling.jpg"
-    },
-    { 
-      id: 4, 
-      title: "Beginning To Forget", 
-      src: "/music/beginning_to_forget.wav", 
-      backgroundImage: "/photos/KG_Background.png"
-    },
-    { 
-      id: 5, 
-      title: "Acoustiic", 
-      src: "/music/Acoustiic.wav", 
-      backgroundImage: "/photos/big_ceiling.jpg"
-    },
-    { 
-      id: 6, 
-      title: "No Build", 
-      src: "/music/No_Build.wav", 
-      backgroundImage: "/photos/KG_Background.png"
-    }
+    { id: 1, title: "Kalybaba", src: "/music/Kalybaba.wav" },
+    { id: 2, title: "Orbit", src: "/music/Orbit.wav" },
+    { id: 3, title: "Razed Edge", src: "/music/Razed_Edge.wav" },
+    { id: 4, title: "Beginning To Forget", src: "/music/beginning_to_forget.wav" },
+    { id: 5, title: "Acoustiic", src: "/music/Acoustiic.wav" },
+    { id: 6, title: "No Build", src: "/music/No_Build.wav" }
   ];
 
-  const currentTrack = tracks[currentTrackIndex];
+  const currentTrack = currentTrackIndex !== null ? tracks[currentTrackIndex] : null;
 
-  // Preload function for a single image
-  const preloadImage = (src) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        setLoadedImages(prev => new Set([...prev, src]));
-        resolve();
-      };
-      img.onerror = reject;
-    });
-  };
-
-  // Initial preload of images
-  useEffect(() => {
-    const preloadInitialImages = async () => {
-      try {
-        // Preload placeholder
-        await preloadImage(LOADING_PLACEHOLDER);
-        
-        // Preload current and next image
-        await preloadImage(tracks[currentTrackIndex].backgroundImage);
-        if (currentTrackIndex < tracks.length - 1) {
-          await preloadImage(tracks[currentTrackIndex + 1].backgroundImage);
-        }
-      } catch (error) {
-        console.error('Error preloading images:', error);
-      }
-    };
-
-    preloadInitialImages();
-  }, []);
-
-  // Preload next image when track changes
-  useEffect(() => {
-    const preloadNextImage = async () => {
-      setIsImageLoading(true);
-      try {
-        await preloadImage(currentTrack.backgroundImage);
-        // Preload next track's image
-        const nextIndex = (currentTrackIndex + 1) % tracks.length;
-        preloadImage(tracks[nextIndex].backgroundImage).catch(console.error);
-      } catch (error) {
-        console.error('Error preloading next image:', error);
-      }
-      setIsImageLoading(false);
-    };
-
-    preloadNextImage();
-  }, [currentTrackIndex]);
-
-  // Auto-play handling
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(error => console.log("Playback failed:", error));
+      if (isPlaying) {
+        audioRef.current.play()
+          .catch(error => console.log("Playback failed:", error));
+      } else {
+        audioRef.current.pause();
+      }
     }
-  }, [currentTrackIndex]);
+  }, [isPlaying, currentTrackIndex]);
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
+  // Add this function inside your AudioPlayer component:
+  const handleDownload = async (trackSrc, trackTitle) => {
+    try {
+      // Get the file
+      const response = await fetch(trackSrc);
+      const blob = await response.blob();
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+
+      // Set the download filename
+      link.download = `${trackTitle}.wav`;
+
+      // Append to document, click, and cleanup
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error('Download failed:', error);
     }
-    setIsPlaying(!isPlaying);
+  };
+
+
+  const togglePlay = (index) => {
+    if (currentTrackIndex === index) {
+      setIsPlaying(!isPlaying);
+    } else {
+      setCurrentTrackIndex(index);
+      setIsPlaying(true);
+      setCurrentTime(0);
+    }
   };
 
   const toggleMute = () => {
@@ -149,105 +94,100 @@ const AudioPlayer = () => {
   };
 
   const skip = (seconds) => {
-    audioRef.current.currentTime += seconds;
-  };
-
-  const selectTrack = (index) => {
-    setCurrentTrackIndex(index);
-    setCurrentTime(0);
-  };
-
-  const getBackgroundStyles = () => {
-    const currentImage = loadedImages.has(currentTrack.backgroundImage) 
-      ? currentTrack.backgroundImage 
-      : LOADING_PLACEHOLDER;
-
-    return {
-      backgroundImage: `url(${currentImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      opacity: isImageLoading ? '0.8' : '1',
-      transition: 'opacity 0.3s ease-in-out, background-image 0.3s ease-in-out'
-    };
+    if (audioRef.current) {
+      audioRef.current.currentTime += seconds;
+    }
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col items-center justify-center gap-8 transition-all duration-1000"
-      style={getBackgroundStyles()}
-    >
-      <div className="w-full max-w-md p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg mb-8">
-        <h3 className="text-2xl font-medium text-center mb-6 text-white">{currentTrack.title}</h3>
-        
-        <audio
-          ref={audioRef}
-          src={currentTrack.src}
-          onTimeUpdate={handleTimeUpdate}
-          onLoadedMetadata={handleLoadedMetadata}
-          className="hidden"
-        />
-        
-        <div className="space-y-4">
-          <input
-            type="range"
-            value={currentTime}
-            max={duration}
-            onChange={handleSeek}
-            className="w-full h-2 bg-white/30 rounded-lg appearance-none cursor-pointer"
-          />
-          
-          <div className="flex justify-between text-sm text-white">
-            <span>{formatTime(currentTime)}</span>
-            <span>{formatTime(duration)}</span>
-          </div>
-          
-          <div className="flex items-center justify-center space-x-4">
-            <button 
-              onClick={() => skip(-10)} 
-              className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
-            >
-              <SkipBack size={20} />
-            </button>
-            
-            <button 
-              onClick={togglePlay}
-              className="p-4 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors"
-            >
-              {isPlaying ? <Pause size={28} /> : <Play size={28} />}
-            </button>
-            
-            <button 
-              onClick={() => skip(10)}
-              className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
-            >
-              <SkipForward size={20} />
-            </button>
-            
-            <button 
-              onClick={toggleMute}
-              className="p-2 hover:bg-white/20 rounded-full transition-colors text-white"
-            >
-              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl overflow-hidden">
+    <div className="audio-player">
+      {/* Song List */}
+      <div className="song-list-container">
         {tracks.map((track, index) => (
-          <button
-            key={track.id}
-            onClick={() => selectTrack(index)}
-            className={`w-full p-4 text-left hover:bg-white/20 transition-colors ${
-              currentTrackIndex === index 
-                ? 'bg-white/30 font-medium' 
-                : 'text-white/80'
-            }`}
-          >
-            <span className="text-white">{track.title}</span>
-          </button>
+          <div key={track.id} className="song-item">
+            <span className="song-title">{track.title}</span>
+            <div className="song-controls">
+              <button
+                onClick={() => togglePlay(index)}
+                className="control-button"
+                aria-label={isPlaying && currentTrackIndex === index ? "Pause" : "Play"}
+              >
+                {isPlaying && currentTrackIndex === index ? (
+                  <Pause size={20} />
+                ) : (
+                  <Play size={20} />
+                )}
+              </button>
+              <button
+                onClick={() => handleDownload(track.src, track.title)}
+                className="control-button"
+                aria-label="Download track"
+              >
+                <Download size={20} />
+              </button>
+            </div>
+          </div>
         ))}
       </div>
+
+      {/* Fixed Bottom Player */}
+      {currentTrack && (
+        <div className="bottom-player">
+          <div className="player-container">
+            <div className="player-header">
+              <span className="current-track-title">{currentTrack.title}</span>
+              <span className="time-display">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
+
+            <input
+              type="range"
+              value={currentTime}
+              max={duration}
+              onChange={handleSeek}
+            />
+
+            <div className="player-controls">
+              <button
+                onClick={() => skip(-10)}
+                className="player-control-button"
+              >
+                <SkipBack size={20} />
+              </button>
+
+              <button
+                onClick={() => togglePlay(currentTrackIndex)}
+                className="play-pause-button"
+              >
+                {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+              </button>
+
+              <button
+                onClick={() => skip(10)}
+                className="player-control-button"
+              >
+                <SkipForward size={20} />
+              </button>
+
+              <button
+                onClick={toggleMute}
+                className="player-control-button"
+              >
+                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+              </button>
+            </div>
+          </div>
+
+          <audio
+            ref={audioRef}
+            src={currentTrack.src}
+            onTimeUpdate={handleTimeUpdate}
+            onLoadedMetadata={handleLoadedMetadata}
+            className="hidden"
+          />
+        </div>
+      )}
     </div>
   );
 };
