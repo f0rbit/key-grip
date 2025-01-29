@@ -211,9 +211,7 @@ const EpPage = () => {
   <div
 	className="min-h-screen flex flex-col items-center justify-center gap-8 bg-neutral-900"
   >
-	<div className="fixed top-0 left-0 w-screen h-screen -z-10 overflow-hidden duration-1000 transition-all" />
 	<BurgerBar fixed={false} />
-	<div className="absolute inset-0 bg-black/40 -z-10"></div>
 	<section className="mx-10 sm:mx-20 md:mx-40 pt-24 grid gap-5">
 	  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 		<Image src={Ep1CoverArt} alt="Episode 1 Cover Art" width={400} height={400} className="rounded-md" />
