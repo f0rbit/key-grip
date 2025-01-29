@@ -30,7 +30,7 @@ export function BurgerProvider({ children }: Readonly<{ children: React.ReactNod
   return <BurgerContext.Provider value={{ open, toggle, setOpen }}>{children}</BurgerContext.Provider>;
 }
 
-export function BurgerBar() {
+export function BurgerBar({ fixed = false }: { fixed?: boolean }) {
   const { open, toggle } = useContext(BurgerContext);
 
 
@@ -38,7 +38,7 @@ export function BurgerBar() {
     <div className="absolute top-0 left-0">
       <div className="hidden md:flex">
         <nav
-          className={clsx("flex flex-row gap-2 fixed top-4 h-10 w-screen text-neutral-50 z-[500] justify-between px-10 text-2xl drop-shadow-md")}
+          className={clsx("flex flex-row gap-2 top-4 h-10 w-screen text-neutral-50 z-[500] justify-between px-10 text-2xl drop-shadow-md", fixed ? "fixed" : "relative" )}
         >
           <section id="links" className={clsx("flex flex-row gap-5")}>
             {MENU_LINKS.map(({ label, href }) => (

@@ -7,15 +7,15 @@ import { EPLink } from '@/components/burger-bar';
 
 
 
-const SpotifyLogo = () => (
-  <img
+export const SpotifyLogo = () => {
+  return <img
     src="photos/Spotify_Primary_Logo_RGB_White.png"
     alt="Music"
     className="w-6 h-6"
   />
-)
+}
 
-const AppleMusicLogo = () => (
+export const AppleMusicLogo = () => (
   <img
     src="photos/Apple_Music_icon.png"
     alt="Music"
@@ -23,7 +23,7 @@ const AppleMusicLogo = () => (
   />
 )
 
-const Bandcamplogo = () => (
+export const Bandcamplogo = () => (
   <img
     src="photos/bandcamp-icon.png"
     alt="Music"
