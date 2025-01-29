@@ -4,17 +4,17 @@ import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
-import { ExternalLink, Download } from 'lucide-react';
+import { ExternalLink, Download, SkipBack, Pause, Play, SkipForward, VolumeX, Volume2 } from 'lucide-react';
 import Lizard from '~/public/lizard.webp';
 import "../../../components/audio-player.css"
 
 const AudioPlayer = () => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(null);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const tracks = [
     { id: 1, title: "Kalybaba", src: "/music/Kalybaba.wav" },
@@ -39,7 +39,7 @@ const AudioPlayer = () => {
   }, [isPlaying, currentTrackIndex]);
 
   // Add this function inside your AudioPlayer component:
-  const handleDownload = async (trackSrc, trackTitle) => {
+  const handleDownload = async (trackSrc: string, trackTitle: string) => {
     try {
       // Get the file
       const response = await fetch(trackSrc);
@@ -63,7 +63,11 @@ const AudioPlayer = () => {
   };
 
 
-  const togglePlay = (index) => {
+  const togglePlay = (index: number | null) => {
+	if (index == null) {
+		setIsPlaying(false);
+		return;
+	}
     if (currentTrackIndex === index) {
       setIsPlaying(!isPlaying);
     } else {
@@ -74,31 +78,36 @@ const AudioPlayer = () => {
   };
 
   const toggleMute = () => {
+	if (!audioRef.current) return;
     audioRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
   };
 
   const handleTimeUpdate = () => {
+	if (!audioRef.current) return;
     setCurrentTime(audioRef.current.currentTime);
   };
 
   const handleLoadedMetadata = () => {
+	if (!audioRef.current) return;
     setDuration(audioRef.current.duration);
   };
 
-  const handleSeek = (e) => {
-    const time = e.target.value;
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+	if (!audioRef.current) return;
+    const time = Number(e.target.value);
+	if (!audioRef.current) return;
     audioRef.current.currentTime = time;
     setCurrentTime(time);
   };
 
-  const formatTime = (time) => {
+  const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const skip = (seconds) => {
+  const skip = (seconds: number) => {
     if (audioRef.current) {
       audioRef.current.currentTime += seconds;
     }
@@ -198,7 +207,7 @@ const AudioPlayer = () => {
 }
 
 const EpPage = () => {
-return (
+	return (
   <div
 	className="min-h-screen flex flex-col items-center justify-center gap-8 bg-neutral-900"
   >
@@ -220,8 +229,7 @@ return (
 	  <p className="text-neutral-300">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis aliquam ipsum, vel fringilla nibh tincidunt sed. Vivamus vel massa est. Nunc erat nunc, tempus vel auctor sed, sollicitudin ut turpis. Duis vehicula mi diam, et tincidunt enim volutpat vel. Quisque enim nibh, laoreet in nisi id, dignissim posuere sem. In non diam ut velit maximus suscipit. Integer non elementum dolor. Sed ultricies nisi sit amet lectus faucibus commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque justo magna, faucibus vel sodales in, posuere sed nulla. Pellentesque ut nibh eget diam posuere laoreet. Nullam pretium non ipsum ut venenatis. Nulla blandit hendrerit eros, eu pretium lacus fermentum at. Sed eget maximus libero.
 	  </p>
-	  {/* Track List goes here */}
-	  <p>Track List</p>
+	  <AudioPlayer />
 	  {/* Lore Section */}
 	  <div className="grid grid-cols-3 gap-5">
 		<div className="relative">
@@ -270,4 +278,4 @@ return (
 );
 };
 
-export default AudioPlayer;
+export default EpPage;
