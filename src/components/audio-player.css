@@ -137,8 +137,3 @@ input[type='range']::-moz-range-progress {
   background: black;
   height: 4px;
 }
-
-/* Utility classes that should remain */
-.hidden {
-  display: none;
-}
