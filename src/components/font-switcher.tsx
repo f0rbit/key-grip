@@ -23,7 +23,7 @@ const FontSwitcher = ({ text, fonts, interval }: FontSwitcherProps) => {
   }, [fonts, interval]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-0">
+    <div className="flex flex-col items-center justify-center h-0 drop-shadow-md">
       <p className={cn("text-3xl", currentFont)}>
         {text}
       </p>
