@@ -1,0 +1,143 @@
+/* Layout styles */
+.audio-player {
+  min-height: 100vh;
+  padding-bottom: 6rem;
+}
+
+.song-list-container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  justify-content: space-between;
+}
+
+.song-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  order: 2;
+}
+
+.control-button {
+  padding: 0.5rem;
+  border-radius: 9999px;
+}
+
+.control-button:hover {
+  background-color: #f3f4f6;
+}
+
+.song-title {
+  color: #1f2937;
+}
+
+/* Fixed bottom player */
+.bottom-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+}
+
+.player-container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.current-track-title {
+  font-size: 0.875rem;
+  color: #4b5563;
+  flex: 1;
+}
+
+.time-display {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.player-control-button {
+  padding: 0.5rem;
+  color: #4b5563;
+}
+
+.player-control-button:hover {
+  color: #1f2937;
+}
+
+.play-pause-button {
+  padding: 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 9999px;
+}
+
+.play-pause-button:hover {
+  background-color: #2563eb;
+}
+
+/* Range input styles */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+  height: 0.25rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  background: #e5e7eb;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  background: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background: black;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+input[type='range']::-moz-range-progress {
+  background: black;
+  height: 4px;
+}
+
+/* Utility classes that should remain */
+.hidden {
+  display: none;
+}
