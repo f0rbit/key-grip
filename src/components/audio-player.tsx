@@ -208,7 +208,7 @@ export const PlaySection = ({ links }: { links: PlayLink[] }) => {
   return (
     <div className="grid gap-2 text-white">
       {links.map((link) => (
-        <a className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={link.href} target="_blank" rel="noreferrer">
+        <a key={link.href} className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={link.href} target="_blank" rel="noreferrer">
           {link.icon}
           <span className="w-full">{link.text}</span>
           <ExternalLink size={14} />

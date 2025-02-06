@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { BurgerBar } from '@/components/burger-bar';
-import Ep1CoverArt from "~/public/ep1-cover.jpg";
+import Ep2CoverArt from "~/public/ep2-cover.png";
 import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
 import Lizard from '~/public/lizard.webp';
@@ -34,13 +34,13 @@ const EpPage = () => {
       <BurgerBar fixed={false} />
       <section className="mx-10 sm:mx-20 md:mx-40 pt-24 grid gap-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <Image src={Ep1CoverArt} alt="Episode 1 Cover Art" width={400} height={400} className="rounded-md" />
+          <Image src={Ep2CoverArt} alt="Episode 1 Cover Art" width={400} height={400} className="rounded-md" />
           <div className="flex flex-col gap-1">
             <h1 className="text-white text-left text-[7pt] leading-[0] h-[20px] mt-[20px]">
               <RandomFontTitle title="Key Grip...!" />
             </h1>
             <p className="text-neutral-400 text-left text-base mb-5">
-              February 10, 2023
+              February 10, 2025
             </p>
             <PlaySection links={play_links} />
           </div>
