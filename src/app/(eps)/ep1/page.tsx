@@ -7,7 +7,7 @@ import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
 import Lizard from '~/public/lizard.webp';
 import "../../../components/audio-player.css";
-import PS2CloudBackground from '@/components/ps2WaterShader';
+import GlitchEffect from '@/components/ps2WaterShader';
 import { Download, ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
 import { PlaySection } from '@/components/audio-player';
@@ -270,7 +270,7 @@ const AudioPlayer: React.FC = () => {
 const EpPage: React.FC = () => {
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-neutral-900">
-      <PS2CloudBackground />
+      <GlitchEffect />
       <div className="relative z-10">
         <BurgerBar fixed={false} />
         <section className="mx-4 sm:mx-8 md:mx-16 lg:mx-24 pt-12 grid gap-5">
