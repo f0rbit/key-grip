@@ -1,7 +1,10 @@
 "use client";
 import clsx from "clsx";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { createContext, useContext, useState } from "react";
+import Ep1CoverArt from "~/public/ep1-cover.jpg";
+import Ep2CoverArt from "~/public/ep2-cover.png";
 
 // create open/close context for burger bar
 export const BurgerContext = createContext({
@@ -16,8 +19,8 @@ const MENU_LINKS = [
 ];
 
 const EP_LINKS = [
-  { label: "Key Grip..!", href: "/ep2", year: "2025" },
-  { label: "Key Grip...?", href: "/ep1", year: "2023" },
+  { label: "Key Grip..!", href: "/ep2", year: "2025", image: Ep2CoverArt },
+  { label: "Key Grip...?", href: "/ep1", year: "2023", image: Ep1CoverArt },
 ];
 
 export function BurgerProvider({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -42,13 +45,12 @@ export function BurgerBar({ fixed = false }: { fixed?: boolean }) {
         >
           <section id="links" className={clsx("flex flex-row gap-5")}>
             {MENU_LINKS.map(({ label, href }) => (
-              <EPLink key={href} label={label} href={href} />
+              <EPLink key={href} label={label} href={href} image={null} />
             ))}
           </section>
           <section id="links" className={clsx("flex flex-row gap-5")}>
-
-            {EP_LINKS.map(({ label, href, year }) => (
-              <EPLink key={href} label={label} href={href}  year={year}/>
+            {EP_LINKS.map(({ label, href, year, image }) => (
+              <EPLink key={href} label={label} href={href} year={year} image={image} />
             ))}
           </section>
         </nav>
@@ -68,13 +70,13 @@ export function BurgerBar({ fixed = false }: { fixed?: boolean }) {
           <div className="grid gap-2 px-8 justify-center">
             <section id="links" className={clsx("grid gap-2 px-8")}>
               {MENU_LINKS.map(({ label, href }) => (
-                <EPLink key={href} label={label} href={href} />
+                <EPLink key={href} label={label} href={href} image={null} />
               ))}
             </section>
             <hr className="border-neutral-500 dark:border-neutral-400 rounded-md mx-5 my-5" />
             <section id="ep-links" className={clsx("grid gap-2 px-8")}>
-              {EP_LINKS.map(({ label, href, year }) => (
-                <EPLink key={href} label={label} href={href} year={year} />
+              {EP_LINKS.map(({ label, href, year, image }) => (
+                <EPLink key={href} label={label} href={href} year={year} image={image} />
               ))}
             </section>
           </div>
@@ -98,15 +100,14 @@ function Hamburger({ open }: Readonly<{ open: boolean }>) {
   );
 }
 
-export function EPLink({ label, href, year }: Readonly<{ label: string; href: string; year?: string }>) {
+export function EPLink({ label, href, year, image }: Readonly<{ label: string; href: string; year?: string, image: StaticImageData | null }>) {
   const { setOpen } = useContext(BurgerContext);
 
   return (
-    <Link href={href} className="flex flex-row items-center gap-2 hover:scale-110 transition-transform duration-300 origin-center group" onClick={() => setOpen(false)}>
-      <h3 className="font-bold">
-        {label}
-      </h3>
-      {year && <p className="scale-[0.6] opacity-75 origin-left">{year}</p>}
+    <Link href={href} className="flex flex-col w-full items-center gap-2 hover:scale-110 transition-transform duration-300 origin-center group" onClick={() => setOpen(false)}>
+      {image && <Image src={image} alt={label} width={80} height={80} className="rounded-md" />}
+      {!image && <h3 className="font-bold">{label}</h3>}
+      {year && <p className="text-sm opacity-75 origin-left">{year}</p>}
     </Link>
   );
 }
