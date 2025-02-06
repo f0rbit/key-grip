@@ -106,7 +106,7 @@ export function EPLink({ label, href, year }: Readonly<{ label: string; href: st
       <h3 className="font-bold">
         {label}
       </h3>
-      {year && <p className="scale-75 opacity-75 origin-left">{year}</p>}
+      {year && <p className="scale-[0.6] opacity-75 origin-left">{year}</p>}
     </Link>
   );
 }
