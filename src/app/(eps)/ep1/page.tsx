@@ -4,7 +4,6 @@ import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
-import { ExternalLink } from 'lucide-react';
 import Lizard from '~/public/lizard.webp';
 import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
 import { AudioPlayer, PlaySection } from '@/components/audio-player';

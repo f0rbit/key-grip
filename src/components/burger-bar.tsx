@@ -16,7 +16,7 @@ const MENU_LINKS = [
 ];
 
 const EP_LINKS = [
-  { label: "NEW EP", href: "/ep2", year: "2025" },
+  { label: "Key Grip..!", href: "/ep2", year: "2025" },
   { label: "Key Grip...?", href: "/ep1", year: "2023" },
 ];
 
