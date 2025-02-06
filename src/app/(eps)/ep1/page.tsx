@@ -7,6 +7,8 @@ import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
 import { ExternalLink, Download, SkipBack, Pause, Play, SkipForward, VolumeX, Volume2 } from 'lucide-react';
 import Lizard from '~/public/lizard.webp';
 import "../../../components/audio-player.css"
+import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
+import clsx from 'clsx';
 
 const AudioPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
@@ -216,7 +218,9 @@ const EpPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Image src={Ep1CoverArt} alt="Episode 1 Cover Art" width={400} height={400} className="rounded-md" />
           <div className="flex flex-col gap-1">
-            <h1 className="text-white text-left text-xl sm:text-2xl md:text-3xl ">Key Grip...?</h1>
+            <h1 className="text-white text-left text-[7pt] leading-[0] h-[20px] mt-[20px]">
+              <RandomFontTitle title="Key Grip...?" />
+            </h1>
             <p className="text-neutral-400 text-left text-base mb-5">
               February 10, 2023
             </p>
@@ -254,26 +258,81 @@ const PlaySection = () => {
   const APPLE_MUSIC_LINK = `https://music.apple.com/au/album/key-grip-ep/1791267851`;
   const BANDCAMP_LINK = `https://keygripmusic.bandcamp.com/album/key-grip`;
 
+  const PlayLink = ({ href, icon, text }: { href: string; icon: React.ReactNode; text: string }) => {
+    return (
+      <a className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={href} target="_blank" rel="noreferrer">
+        {icon}
+        <span className="w-full">{text}</span>
+        <ExternalLink size={14} />
+      </a>
+    );
+  };
+
   // links with icons for each
   return (
     <div className="grid gap-2 text-white">
-      <a className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={SPOTIFY_LINK} target="_blank" rel="noreferrer">
-        <SpotifyLogo />
-        <span className="w-full">Spotify</span>
-        <ExternalLink size={14} />
-      </a>
-      <a className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={APPLE_MUSIC_LINK} target="_blank" rel="noreferrer">
-        <AppleMusicLogo />
-        <span className="w-full">Apple Music</span>
-        <ExternalLink size={14} />
-      </a>
-      <a className="flex row items-center gap-2 border border-neutral-300 rounded-sm p-2 hover:scale-105 transition-transform duration-300" href={BANDCAMP_LINK} target="_blank" rel="noreferrer">
-        <Bandcamplogo />
-        <span className="w-full">Bandcamp</span>
-        <ExternalLink size={14} />
-      </a>
+      <PlayLink href={SPOTIFY_LINK} icon={<SpotifyLogo />} text="Spotify" />
+      <PlayLink href={APPLE_MUSIC_LINK} icon={<AppleMusicLogo />} text="Apple Music" />
+      <PlayLink href={BANDCAMP_LINK} icon={<Bandcamplogo />} text="Bandcamp" />
     </div>
   );
 };
 
 export default EpPage;
+
+const fonts = [
+    adramalech.className + " text-[4em]",
+    albemarle.className + " text-[4.6em]",
+    celticsea.className + " text-[5.4em]",
+    durendal.className + " text-[3.4em]",
+    fuse.className + " text-[4.8em]",
+    minima.className + " text-[6.2em]",
+    norumbega.className + " text-[4em]",
+    scurlock.className + " text-[4.6em]",
+  ];
+
+
+
+const RandomFontTitle = ({ title }: { title: string }) => {
+  const [charStyles, setCharStyles] = useState<string[]>([]);
+  const [chars, setChars] = useState<string[]>([]);
+
+  const getRandomFontClass = () => {
+    return fonts[Math.floor(Math.random() * fonts.length)];
+  };
+
+  useEffect(() => {
+    // Initialize the characters and their styles when the title changes
+    const initialChars = title.split("");
+    const initialStyles = initialChars.map(() => getRandomFontClass());
+
+    setChars(initialChars);
+    setCharStyles(initialStyles);
+  }, [title]); // This effect runs only when the title changes
+
+  useEffect(() => {
+    // Update character styles every 100ms
+    const interval = setInterval(() => {
+      setCharStyles((prevStyles) =>
+        prevStyles.map((style) =>
+          Math.random() < 0.1 // 1/10 chance to change font
+            ? getRandomFontClass()
+            : "text-[4em]"
+        )
+      );
+    }, 150);
+
+    return () => clearInterval(interval); // Cleanup the interval on unmount
+  }, [chars]);
+
+  return (
+    <>
+      {chars.map((char, index) => (
+        <span key={index} className={charStyles[index]}>
+          {char}
+        </span>
+      ))}
+    </>
+  );
+
+};
