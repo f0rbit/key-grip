@@ -1,29 +1,16 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
-import Lizard from '~/public/lizard.webp';
 import "../../../components/audio-player.css";
-import GlitchEffect from '@/components/ps2WaterShader';
-import { Download, ExternalLink, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import CubeEffect from '@/components/ep1-cube-background';
 import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
 import { PlaySection } from '@/components/audio-player';
-
-// Types
-interface Track {
-  id: number;
-  title: string;
-  src: string;
-}
-
-interface PlayLink {
-  href: string;
-  icon: React.ReactNode;
-  text: string;
-}
+import AudioPlayer from '@/components/AudioPlayer';
+import type { Track } from '@/components/AudioPlayer';
 
 // Constants
 const TRACKS: Track[] = [
@@ -34,6 +21,12 @@ const TRACKS: Track[] = [
   { id: 5, title: "Acoustiic", src: "/music/Acoustiic.wav" },
   { id: 6, title: "No Build", src: "/music/No_Build.wav" }
 ];
+
+interface PlayLink {
+  href: string;
+  icon: React.ReactNode;
+  text: string;
+}
 
 const PLAY_LINKS: PlayLink[] = [
   { href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH", icon: <SpotifyLogo />, text: "Spotify" },
@@ -52,22 +45,18 @@ const FONTS = [
   scurlock.className,
 ];
 
-// Utility functions
-const formatTime = (time: number): string => {
-  if (isNaN(time)) return '--:--';
-  const minutes = Math.floor(time / 60);
-  const seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-};
-
 // RandomFontTitle Component
 const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
   const [charStyles, setCharStyles] = useState<string[]>([]);
   const [chars] = useState(() => title.split(""));
 
-  const getRandomFontClass = () =>
-    FONTS[Math.floor(Math.random() * FONTS.length)] +
-    ` text-[${Math.random() * 100 + 110}rem]`;
+  const getRandomFontClass = () => {
+    const randomFont = FONTS[Math.floor(Math.random() * FONTS.length)];
+    // Using Tailwind's predefined text size classes instead of arbitrary values
+    const textSizes = ['text-6xl', 'text-7xl', 'text-8xl'];
+    const randomSize = textSizes[Math.floor(Math.random() * textSizes.length)];
+    return `${randomFont} ${randomSize}`;
+  };
 
   useEffect(() => {
     setCharStyles(chars.map(getRandomFontClass));
@@ -92,280 +81,14 @@ const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
   );
 };
 
-// AudioPlayer Component
-const AudioPlayer: React.FC = () => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('audioMuted') === 'true';
-    }
-    return false;
-  });
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const isUnmountingRef = useRef(false);
-
-  const currentTrack = currentTrackIndex !== null ? TRACKS[currentTrackIndex] : null;
-
-  // Clean up function to handle audio state
-  const cleanupAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = '';
-      audioRef.current.load();
-    }
-  };
-
-  useEffect(() => {
-    // Set up unmounting flag
-    return () => {
-      isUnmountingRef.current = true;
-      cleanupAudio();
-    };
-  }, []);
-
-  useEffect(() => {
-    const handlePlay = async () => {
-      if (!audioRef.current || isUnmountingRef.current) return;
-
-      try {
-        setIsLoading(true);
-        // Create a new Audio element if needed
-        if (!audioRef.current) {
-          audioRef.current = new Audio();
-          audioRef.current.muted = isMuted;
-        }
-
-        // Set the source if it's changed
-        if (currentTrack && audioRef.current.src !== currentTrack.src) {
-          audioRef.current.src = currentTrack.src;
-        }
-
-        await audioRef.current.play();
-      } catch (error) {
-        // Only log error and update state if not unmounting
-        if (!isUnmountingRef.current) {
-          console.error("Playback failed:", error);
-          setIsPlaying(false);
-        }
-      } finally {
-        if (!isUnmountingRef.current) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    const handlePause = () => {
-      if (!audioRef.current || isUnmountingRef.current) return;
-      audioRef.current.pause();
-    };
-
-    if (isPlaying) {
-      handlePlay();
-    } else {
-      handlePause();
-    }
-  }, [isPlaying, currentTrack, isMuted]);
-
-  const handleDownload = async (trackSrc: string, trackTitle: string) => {
-    try {
-      const link = document.createElement('a');
-      link.href = trackSrc;
-      link.download = `${trackTitle}.wav`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Download failed:', error);
-      alert('Download failed. Please try again.');
-    }
-  };
-
-  const controls = {
-    togglePlay: (index: number | null) => {
-      if (index === null) return;
-
-      // If selecting a different track while one is playing
-      if (currentTrackIndex !== index && isPlaying) {
-        cleanupAudio();
-      }
-
-      setCurrentTrackIndex(prev => prev === index ? null : index);
-      setIsPlaying(prev => prev && currentTrackIndex === index ? false : true);
-    },
-
-    toggleMute: () => {
-      if (!audioRef.current) return;
-      const newMuted = !isMuted;
-      audioRef.current.muted = newMuted;
-      setIsMuted(newMuted);
-      localStorage.setItem('audioMuted', String(newMuted));
-    },
-
-    handleSeek: (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!audioRef.current) return;
-      const time = Number(e.target.value);
-      audioRef.current.currentTime = time;
-      setCurrentTime(time);
-    }
-  };
-
-  // Set up audio event listeners
-  useEffect(() => {
-    if (!audioRef.current) return;
-
-    const audio = audioRef.current;
-
-    const handleTimeUpdate = () => {
-      if (!isUnmountingRef.current) {
-        setCurrentTime(audio.currentTime);
-      }
-    };
-
-    const handleLoadedMetadata = () => {
-      if (!isUnmountingRef.current) {
-        setDuration(audio.duration);
-      }
-    };
-
-    const handleEnded = () => {
-      if (!isUnmountingRef.current) {
-        setIsPlaying(false);
-      }
-    };
-
-    const handleError = () => {
-      if (!isUnmountingRef.current) {
-        setIsLoading(false);
-        setIsPlaying(false);
-      }
-    };
-
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('ended', handleEnded);
-    audio.addEventListener('error', handleError);
-
-    return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnded);
-      audio.removeEventListener('error', handleError);
-    };
-  }, []);
-
-  return (
-    <div className="audio-player" role="region" aria-label="Audio player">
-      <div className="song-list-container">
-        {TRACKS.map((track, index) => (
-          <div key={track.id} className="song-item">
-            <span className="song-title">{track.title}</span>
-            <div className="song-controls">
-              <button
-                onClick={() => controls.togglePlay(index)}
-                className="control-button"
-                disabled={isLoading}
-                aria-live="polite"
-              >
-                {isLoading && currentTrackIndex === index ? (
-                  <span className="loading-dots" aria-label="Loading" />
-                ) : isPlaying && currentTrackIndex === index ? (
-                  <Pause size={20} aria-hidden />
-                ) : (
-                  <Play size={20} aria-hidden />
-                )}
-              </button>
-              <button
-                onClick={() => handleDownload(track.src, track.title)}
-                className="control-button"
-              >
-                <Download size={20} aria-hidden />
-                <span className="sr-only">Download {track.title}</span>
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {currentTrack && (
-        <div className="bottom-player">
-          <div className="player-container">
-            <div className="player-header">
-              <span className="current-track-title">{currentTrack.title}</span>
-              <span className="time-display">
-                {formatTime(currentTime)} / {formatTime(duration)}
-              </span>
-            </div>
-
-            <input
-              type="range"
-              value={currentTime}
-              max={duration || 0}
-              onChange={controls.handleSeek}
-              aria-label="Track progress"
-              className="seek-slider"
-            />
-
-            <div className="player-controls">
-              <button
-                onClick={() => audioRef.current && (audioRef.current.currentTime -= 10)}
-                className="player-control-button"
-              >
-                <SkipBack size={20} aria-hidden />
-                <span className="sr-only">Rewind 10 seconds</span>
-              </button>
-              <button
-                onClick={() => controls.togglePlay(currentTrackIndex)}
-                className="play-pause-button"
-              >
-                {isPlaying ? (
-                  <Pause size={24} aria-hidden />
-                ) : (
-                  <Play size={24} aria-hidden />
-                )}
-                <span className="sr-only">{isPlaying ? 'Pause' : 'Play'}</span>
-              </button>
-              <button
-                onClick={() => audioRef.current && (audioRef.current.currentTime += 10)}
-                className="player-control-button"
-              >
-                <SkipForward size={20} aria-hidden />
-                <span className="sr-only">Fast forward 10 seconds</span>
-              </button>
-              <button
-                onClick={controls.toggleMute}
-                className="player-control-button"
-              >
-                {isMuted ? (
-                  <VolumeX size={20} aria-hidden />
-                ) : (
-                  <Volume2 size={20} aria-hidden />
-                )}
-                <span className="sr-only">{isMuted ? 'Unmute' : 'Mute'}</span>
-              </button>
-            </div>
-          </div>
-
-          <audio
-            ref={audioRef}
-            src={currentTrack.src}
-            className="hidden"
-          />
-        </div>
-      )}
-    </div>
-  );
-};
-
 // Main EpPage Component
 const EpPage: React.FC = () => {
+  const [isPlayerVisible, setIsPlayerVisible] = useState(true);
+
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-neutral-900">
       {/* Background Effect */}
-      <GlitchEffect />
+      <CubeEffect />
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -399,16 +122,14 @@ const EpPage: React.FC = () => {
           </div>
 
           {/* Audio Player Section */}
-          <AudioPlayer />
-
+          <AudioPlayer 
+            tracks={TRACKS} 
+            onClosePlayer={() => setIsPlayerVisible(false)} 
+          />
           {/* Review Section */}
           <div className="grid grid-cols-1 max-w-4xl mx-auto gap-6 my-8">
-
-
             {/* Review Content */}
             <div className="space-y-6">
-
-
               <blockquote className="text-neutral-300 space-y-4">
                 <p className="text-xl italic text-neutral-200">
                   "Following the map to a grand new frontier"
@@ -454,19 +175,17 @@ const EpPage: React.FC = () => {
               </blockquote>
             </div>
             <div className="md:col-span-2 space-y-6">
-
-
               <blockquote className="text-neutral-300 space-y-4">
                 <p className="text-xl italic text-neutral-200">
                   so much potential
                 </p>
 
                 <p>
-                  the production here is absolutely insane, like it’s genuinely hard to fathom how good it sounds, however i believe this ep falls short for a few reasons. it’s clear that this duo is full to bursting with ideas, which i can relate to and respect, but i think that they used this EP as more of a showcase of ability and excitement to be creating rather than a homogenized, cohesive experience.
+                  the production here is absolutely insane, like it's genuinely hard to fathom how good it sounds, however i believe this ep falls short for a few reasons. it's clear that this duo is full to bursting with ideas, which i can relate to and respect, but i think that they used this EP as more of a showcase of ability and excitement to be creating rather than a homogenized, cohesive experience.
                 </p>
 
                 <p>
-                  not a lot of the ideas end up sticking simply because they’re washed away in a sonic experience that is worlds different by the next song. i also cannot stand the vocals. it’s clear that their vocalist has talent, however, on this project they do not stick the landing with even a single performance, often devolving into seemingly undeserved croon-wailing. this unfortunately takes something that could have been incredible and makes it difficult to return to for me. i really hope this group continues their output though, because i can hear the makings of some life changing.
+                  not a lot of the ideas end up sticking simply because they're washed away in a sonic experience that is worlds different by the next song. i also cannot stand the vocals. it's clear that their vocalist has talent, however, on this project they do not stick the landing with even a single performance, often devolving into seemingly undeserved croon-wailing. this unfortunately takes something that could have been incredible and makes it difficult to return to for me. i really hope this group continues their output though, because i can hear the makings of some life changing.
                 </p>
 
                 <p className="text-2xl text-neutral-200 mt-6">★★ - Themicroscopes Apr 3 2023 </p>
