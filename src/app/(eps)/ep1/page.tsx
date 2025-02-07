@@ -110,7 +110,7 @@ const EpPage: React.FC = () => {
 
             {/* Album Info */}
             <div className="flex flex-col gap-4 w-full h-full">
-              <RandomFontTitle title="Key Grip...?" />
+              <RandomFontTitle title="Key Grip..?" />
               <time
                 className="text-neutral-400 text-base"
                 dateTime="2023-02-10"
