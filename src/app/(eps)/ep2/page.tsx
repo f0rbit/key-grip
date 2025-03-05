@@ -101,7 +101,8 @@ const EpPage: React.FC = () => {
               <Image
                 src={Ep2CoverArt}
                 alt="Key Grip EP 2 album cover artwork"
-                fill
+                width={400}
+                height={400}
                 className="rounded-md object-cover"
                 priority
               />
@@ -121,9 +122,9 @@ const EpPage: React.FC = () => {
           </div>
 
           {/* Audio Player Section */}
-          <AudioPlayer 
-            tracks={TRACKS} 
-            onClosePlayer={() => setIsPlayerVisible(false)} 
+          <AudioPlayer
+            tracks={TRACKS}
+            onClosePlayer={() => setIsPlayerVisible(false)}
           />
 
           {/* Description Section */}
