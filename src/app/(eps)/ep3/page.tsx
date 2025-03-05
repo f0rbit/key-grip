@@ -85,12 +85,12 @@ const EpPage: React.FC = () => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(true);
 
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
       <VideoBackground videoPath="/videos/walking_in_circles.mp4" />
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-[1]" />
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1]" />
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-20">
         <BurgerBar fixed={false} />
 
         <section className="mx-4 sm:mx-8 md:mx-16 lg:mx-24 pt-12 grid gap-5">
