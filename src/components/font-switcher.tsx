@@ -69,7 +69,7 @@ export const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
     <h1 className="text-white text-left leading-[0.8] my-4">
       {chars.map((char, i) => (
-        <span key={i} className={`inline-block ${charStyles[i]}`} aria-hidden="true">
+        <span key={i} className={`inline-block ${charStyles[i]} min-w-4`}>
           {char}
         </span>
       ))}
