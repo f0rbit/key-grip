@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
 import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
 import "../../../components/audio-player.css";
 import CubeEffect from '@/components/ep1-cube-background';
-import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
 import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
+import { RandomFontTitle } from '@/components/font-switcher';
 
 // Constants
 const TRACKS: Track[] = [
@@ -34,64 +34,17 @@ const PLAY_LINKS: PlayLink[] = [
   { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo />, text: "Bandcamp" }
 ];
 
-const FONTS = [
-  adramalech.className,
-  albemarle.className,
-  celticsea.className,
-  durendal.className,
-  fuse.className,
-  minima.className,
-  norumbega.className,
-  scurlock.className,
-];
-
-// RandomFontTitle Component
-const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
-  const [charStyles, setCharStyles] = useState<string[]>([]);
-  const [chars] = useState(() => title.split(""));
-
-  const getRandomFontClass = () => {
-    const randomFont = FONTS[Math.floor(Math.random() * FONTS.length)];
-    // Using Tailwind's predefined text size classes instead of arbitrary values
-    const textSizes = ['text-6xl', 'text-7xl', 'text-8xl'];
-    const randomSize = textSizes[Math.floor(Math.random() * textSizes.length)];
-    return `${randomFont} ${randomSize}`;
-  };
-
-  useEffect(() => {
-    setCharStyles(chars.map(getRandomFontClass));
-    const interval = setInterval(() => {
-      setCharStyles(prev => prev.map((_, i) =>
-        Math.random() < 0.1 ? getRandomFontClass() : prev[i]
-      ));
-    }, 300);
-
-    return () => clearInterval(interval);
-  }, [chars]);
-
-  return (
-    <h1 className="text-white text-left leading-[0.8] my-4">
-      {chars.map((char, i) => (
-        <span key={i} className={`inline-block ${charStyles[i]}`} aria-hidden="true">
-          {char}
-        </span>
-      ))}
-      <span className="sr-only">{title}</span>
-    </h1>
-  );
-};
-
 // Main EpPage Component
 const EpPage: React.FC = () => {
   const [isPlayerVisible, setIsPlayerVisible] = useState(true);
 
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden bg-neutral-900">
+    <main className="relative w-full min-h-screen overflow-x-hidden bg-neutral-900 pb-24">
       {/* Background Effect */}
       <CubeEffect />
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-20">
         <BurgerBar fixed={false} />
 
         <section className="mx-4 sm:mx-8 md:mx-16 lg:mx-24 pt-12 grid gap-5">
