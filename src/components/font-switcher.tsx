@@ -50,7 +50,7 @@ export const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
 
   const getRandomFontClass = () => {
     const randomFont = FONTS[Math.floor(Math.random() * FONTS.length)];
-    const textSizes = ['text-6xl', 'text-7xl', 'text-8xl'];
+    const textSizes = ['text-[3rem]', 'text-[3.5rem]', 'text-[4rem]'];
     const randomSize = textSizes[Math.floor(Math.random() * textSizes.length)];
     return `${randomFont} ${randomSize}`;
   };
@@ -59,7 +59,7 @@ export const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
     setCharStyles(chars.map(getRandomFontClass));
     const interval = setInterval(() => {
       setCharStyles(prev => prev.map((_, i) =>
-        Math.random() < 0.1 ? getRandomFontClass() : prev[i]
+        Math.random() < 0.12 ? getRandomFontClass() : prev[i]
       ));
     }, 300);
 
