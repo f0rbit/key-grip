@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #2d2d2d;
   justify-content: space-between;
 }
 
@@ -28,14 +28,47 @@
   padding: 0.5rem;
   border-radius: 100%;
   color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .control-button:hover {
-  background-color: #5b5b5b;
+  background-color: #2d2d2d;
+}
+
+.control-button svg,
+.control-button .loading-dots {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .song-title {
   color: white;
+}
+
+/* Loading animation */
+.loading-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.loading-spinner:after {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-color: #ffffff transparent #ffffff transparent;
+  animation: spinner 1.2s linear infinite;
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Fixed bottom player */
@@ -44,8 +77,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
-  border-top: 1px solid #e5e7eb;
+  background-color: #000000;
+  border-top: 1px solid #2d2d2d;
   padding: 0.75rem 1rem;
   z-index: 10;
 }
@@ -63,13 +96,13 @@
 
 .current-track-title {
   font-size: 0.875rem;
-  color: #4b5563;
+  color: #ffffff;
   flex: 1;
 }
 
 .time-display {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #a3a3a3;
 }
 
 .player-controls {
@@ -81,59 +114,74 @@
 
 .player-control-button {
   padding: 0.5rem;
-  color: #4b5563;
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
 }
 
 .player-control-button:hover {
-  color: #1f2937;
+  color: #a3a3a3;
+}
+
+.player-control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .play-pause-button {
   padding: 0.75rem;
-  background-color: #3b82f6;
   color: white;
   border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
 }
 
 .play-pause-button:hover {
-  background-color: #2563eb;
+  background-color: #2d2d2d;
+}
+
+.play-pause-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.play-pause-button svg,
+.play-pause-button .loading-dots {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Range input styles */
 input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
+  background: #2d2d2d;
   width: 100%;
-  height: 0.25rem;
+  height: 4px;
   margin-bottom: 1rem;
   cursor: pointer;
-}
-
-input[type='range']::-webkit-slider-runnable-track {
-  background: #e5e7eb;
+  border-radius: 2px;
+  background-image: linear-gradient(white, white);
+  background-size: var(--progress-width, 0%) 100%;
+  background-repeat: no-repeat;
+  transition: height 0.2s ease-in-out;
 }
 
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  height: 16px;
-  width: 16px;
-  background: black;
-  border-radius: 50%;
-  cursor: pointer;
+  width: 0;
+  height: 0;
 }
 
 input[type='range']::-moz-range-thumb {
-  height: 16px;
-  width: 16px;
-  background: black;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
+  width: 0;
+  height: 0;
+  border: 0;
 }
 
-input[type='range']::-moz-range-progress {
-  background: black;
-  height: 4px;
+input[type='range']:hover {
+  height: 6px;
+}
+
+input[type='range']:active {
+  height: 6px;
 }
