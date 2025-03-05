@@ -10,7 +10,6 @@ export interface Track {
 
 interface AudioPlayerProps {
   tracks: Track[];
-  onClosePlayer?: () => void;
 }
 
 const formatTime = (time: number): string => {
@@ -20,7 +19,7 @@ const formatTime = (time: number): string => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks }) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -266,7 +265,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
               <span className="time-display" role="timer" aria-label="Time">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
-              {onClosePlayer && (
                 <button
                   onClick={() => {
                     if (audioRef.current) {
@@ -274,14 +272,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
                     }
                     setIsPlaying(false);
                     setCurrentTrackIndex(null);
-                    onClosePlayer();
                   }}
                   className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors ml-4"
                   aria-label="Close audio player"
                 >
                   <X size={20} />
                 </button>
-              )}
             </div>
 
             <input
