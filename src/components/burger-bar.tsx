@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createContext, useContext, useState } from "react";
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Ep2CoverArt from "~/public/ep2-cover.png";
+import EP3CoverArt from "~/public/photos/KGPresentsCover.png"
 
 // create open/close context for burger bar
 export const BurgerContext = createContext({
@@ -19,6 +20,7 @@ const MENU_LINKS = [
 ];
 
 const EP_LINKS = [
+  { label: "Key Grip Present...", href: "/ep3", year: "2025", image: EP3CoverArt},
   { label: "Key Grip..!", href: "/ep2", year: "2025", image: Ep2CoverArt },
   { label: "Key Grip...?", href: "/ep1", year: "2023", image: Ep1CoverArt },
 ];

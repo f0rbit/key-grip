@@ -82,6 +82,7 @@ const EpPage: React.FC = () => {
             {/* Review Content */}
             <div className="space-y-6">
               <blockquote className="text-neutral-300 space-y-4">
+              <p className="text-2xl text-neutral-200 mt-6">★★★★ - duncanreviews March 16 2023 </p>
                 <p className="text-xl italic text-neutral-200">
                   "Following the map to a grand new frontier"
                 </p>
@@ -121,12 +122,11 @@ const EpPage: React.FC = () => {
                   in this direction of humble ambition, their talents are sure to spread in a similar
                   fashion to some of the greatest acts of the 2020s.
                 </p>
-
-                <p className="text-2xl text-neutral-200 mt-6">★★★★ - duncanreviews March 16 2023 </p>
               </blockquote>
             </div>
             <div className="md:col-span-2 space-y-6">
               <blockquote className="text-neutral-300 space-y-4">
+              <p className="text-2xl text-neutral-200 mt-6">★★ - Themicroscopes Apr 3 2023 </p>
                 <p className="text-xl italic text-neutral-200">
                   so much potential
                 </p>
@@ -138,8 +138,6 @@ const EpPage: React.FC = () => {
                 <p>
                   not a lot of the ideas end up sticking simply because they're washed away in a sonic experience that is worlds different by the next song. i also cannot stand the vocals. it's clear that their vocalist has talent, however, on this project they do not stick the landing with even a single performance, often devolving into seemingly undeserved croon-wailing. this unfortunately takes something that could have been incredible and makes it difficult to return to for me. i really hope this group continues their output though, because i can hear the makings of some life changing.
                 </p>
-
-                <p className="text-2xl text-neutral-200 mt-6">★★ - Themicroscopes Apr 3 2023 </p>
               </blockquote>
             </div>
           </div>
