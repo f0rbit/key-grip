@@ -36,12 +36,11 @@ const PLAY_LINKS: PlayLink[] = [
 
 // Main EpPage Component
 const EpPage: React.FC = () => {
-  const [isPlayerVisible, setIsPlayerVisible] = useState(true);
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
       <VideoBackground videoPath="/videos/walking_in_circles.mp4" />
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-[1]" />
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
       {/* Main Content */}
       <div className="relative z-10 pt-20">
@@ -76,10 +75,7 @@ const EpPage: React.FC = () => {
           </div>
 
           {/* Audio Player Section */}
-          <AudioPlayer
-            tracks={TRACKS}
-            onClosePlayer={() => setIsPlayerVisible(false)}
-          />
+          <AudioPlayer tracks={TRACKS} />
 
           {/* Description Section */}
           <div className="grid grid-cols-1 max-w-4xl mx-auto gap-6 my-8">

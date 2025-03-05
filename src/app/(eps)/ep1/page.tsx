@@ -36,7 +36,6 @@ const PLAY_LINKS: PlayLink[] = [
 
 // Main EpPage Component
 const EpPage: React.FC = () => {
-  const [isPlayerVisible, setIsPlayerVisible] = useState(true);
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-neutral-900 pb-24">
@@ -77,7 +76,6 @@ const EpPage: React.FC = () => {
           {/* Audio Player Section */}
           <AudioPlayer 
             tracks={TRACKS} 
-            onClosePlayer={() => setIsPlayerVisible(false)} 
           />
           {/* Review Section */}
           <div className="grid grid-cols-1 max-w-4xl mx-auto gap-6 my-8">
