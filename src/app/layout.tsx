@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { BurgerBar, BurgerProvider } from "@/components/burger-bar";
+import { BurgerProvider } from "@/components/burger-bar";
 import { cn } from "@/lib/utils";
 
 const geistSans = localFont({

@@ -84,7 +84,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks }) => {
       console.error('Audio error:', e);
 
       let error_message = 'failed to load audio. please try again.';
-      let error_code = e.target.error?.code;
+      const error_code = e.target.error?.code;
 
       switch (error_code) {
         case MediaError.MEDIA_ERR_ABORTED:
