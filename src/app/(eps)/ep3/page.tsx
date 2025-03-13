@@ -13,13 +13,13 @@ import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 
 // Constants
-const TRACKS: Track[] = [
-	{ id: 1, title: "This", src: "/music/This.wav" },
-	{ id: 2, title: "is", src: "/music/is.wav" },
-	{ id: 3, title: "just", src: "/music/just.wav" },
-	{ id: 4, title: "the", src: "/music/the.wav" },
-	{ id: 5, title: "first", src: "/music/first.wav" },
-	{ id: 6, title: "EP", src: "/music/EP.wav" }
+const TRACKS: Track[] = [// TODO: add new songs
+	{ id: 1, title: "Arrival", src: "/music/KGPresentsMasters/Arrival.wav" },
+	{ id: 2, title: "Pruned Fruit", src: "/music/KGPresentsMasters/Pruned_Fruit.wav" },
+	{ id: 3, title: "Hi Basil", src: "/music/KGPresentsMasters/Hi_Basil.wav"},
+	{ id: 4, title: "The Dog And The Martyr", src: "/music/KGPresentsMasters/TDATM.wav"},
+	{ id: 5, title: "They Sleep Tonight", src:  "/music/KGPresentsMasters/They_Sleep_Tonight.wav"},
+	{ id: 6, title: "Her House", src:  "/music/KGPresentsMasters/Her_House.wav"}
 ];
 
 interface PlayLink {
