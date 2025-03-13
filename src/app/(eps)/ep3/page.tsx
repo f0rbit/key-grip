@@ -11,15 +11,16 @@ import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL } from '@/lib/music';
 
 // Constants
 const TRACKS: Track[] = [// TODO: add new songs
-	{ id: 1, title: "Arrival", src: "/music/KGPresentsMasters/Arrival.wav" },
-	{ id: 2, title: "Pruned Fruit", src: "/music/KGPresentsMasters/Pruned_Fruit.wav" },
-	{ id: 3, title: "Hi Basil", src: "/music/KGPresentsMasters/Hi_Basil.wav"},
-	{ id: 4, title: "The Dog And The Martyr", src: "/music/KGPresentsMasters/TDATM.wav"},
-	{ id: 5, title: "They Sleep Tonight", src:  "/music/KGPresentsMasters/They_Sleep_Tonight.wav"},
-	{ id: 6, title: "Her House", src:  "/music/KGPresentsMasters/Her_House.wav"}
+	{ id: 1, title: "Arrival", src: getSongURL("ep3", "arrival")  },
+	{ id: 2, title: "Pruned Fruit", src: getSongURL("ep3", "pruned_fruit")  },
+	{ id: 3, title: "Hi Basil", src: getSongURL("ep3", "hi_basil") },
+	{ id: 4, title: "The Dog And The Martyr", src: getSongURL("ep3", "tdatm") },
+	{ id: 5, title: "They Sleep Tonight", src: getSongURL("ep3", "they_sleep_tonight") },
+	{ id: 6, title: "Her House", src: getSongURL("ep3", "her_house") }
 ];
 
 interface PlayLink {

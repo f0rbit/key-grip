@@ -11,15 +11,16 @@ import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL } from '@/lib/music';
 
 // Constants
 const TRACKS: Track[] = [
-  { id: 1, title: "Kalybaba", src: "/music/Kalybaba.wav" },
-  { id: 2, title: "Orbit", src: "/music/Orbit.wav" },
-  { id: 3, title: "Razed Edge", src: "/music/Razed_Edge.wav" },
-  { id: 4, title: "Beginning To Forget", src: "/music/beginning_to_forget.wav" },
-  { id: 5, title: "Acoustiic", src: "/music/Acoustiic.wav" },
-  { id: 6, title: "No Build", src: "/music/No_Build.wav" }
+  { id: 1, title: "Kalybaba", src: getSongURL("ep1", "kalybaba") },
+  { id: 2, title: "Orbit", src: getSongURL("ep1", "orbit") },
+  { id: 3, title: "Razed Edge", src: getSongURL("ep1", "razed_edge") },
+  { id: 4, title: "Beginning To Forget", src: getSongURL("ep1", "beginning_to_forget") },
+  { id: 5, title: "Acoustiic", src: getSongURL("ep1", "acoustiic") },
+  { id: 6, title: "No Build", src: getSongURL("ep1", "no_build") }
 ];
 
 interface PlayLink {
