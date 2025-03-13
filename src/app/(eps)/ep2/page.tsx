@@ -11,7 +11,7 @@ import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
-import { getSongURL } from '@/lib/music';
+import { getSongURL, getVideoURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [
@@ -40,7 +40,7 @@ const EpPage: React.FC = () => {
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-      <VideoBackground videoPath="/videos/walking_in_circles.mp4" />
+      <VideoBackground videoPath={getVideoURL("walking_in_circles")} />
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
       {/* Main Content */}

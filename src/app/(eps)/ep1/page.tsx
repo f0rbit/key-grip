@@ -11,7 +11,7 @@ import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
-import { getSongURL } from '@/lib/music';
+import { getSongURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [

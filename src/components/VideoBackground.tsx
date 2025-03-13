@@ -1,4 +1,5 @@
 'use client';
+import { getVideoURL } from '@/lib/storage';
 import React, { useEffect } from 'react';
 
 interface VideoBackgroundProps {
@@ -6,7 +7,7 @@ interface VideoBackgroundProps {
 }
 
 const VideoBackground: React.FC<VideoBackgroundProps> = ({ 
-  videoPath = '/videos/walkingVid.mp4'  // Default path
+  videoPath = getVideoURL("walking_forest") // default video
 }) => {
   useEffect(() => {
     const video = document.querySelector('video');
