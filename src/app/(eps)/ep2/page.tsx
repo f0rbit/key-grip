@@ -1,25 +1,26 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep2CoverArt from "~/public/ep2-cover.png";
 import Image from "next/image";
-import { AppleMusicLogo, Bandcamplogo, SpotifyLogo } from '@/app/links/page';
 import "../../../components/audio-player.css";
 import VideoBackground from '@/components/VideoBackground';
-import { adramalech, albemarle, celticsea, durendal, fuse, minima, norumbega, scurlock } from '@/lib/fonts';
 import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
+import { RandomFontTitle } from '@/components/font-switcher';
+import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL, getVideoURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [
-  { id: 1, title: "This", src: "/music/This.wav" },
-  { id: 2, title: "is", src: "/music/is.wav" },
-  { id: 3, title: "just", src: "/music/just.wav" },
-  { id: 4, title: "the", src: "/music/the.wav" },
-  { id: 5, title: "first", src: "/music/first.wav" },
-  { id: 6, title: "EP", src: "/music/EP.wav" }
+  { id: 1, title: "This", src: getSongURL("ep2", "this") },
+  { id: 2, title: "is", src: getSongURL("ep2", "is") },
+  { id: 3, title: "just", src: getSongURL("ep2", "just") },
+  { id: 4, title: "the", src: getSongURL("ep2", "the") },
+  { id: 5, title: "first", src: getSongURL("ep2", "first") },
+  { id: 6, title: "EP", src: getSongURL("ep2", "ep") }
 ];
 
 interface PlayLink {
@@ -29,68 +30,21 @@ interface PlayLink {
 }
 
 const PLAY_LINKS: PlayLink[] = [
-  { href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH?si=-JK4Sy72SKy8ucVt_8Q-Jw", icon: <SpotifyLogo />, text: "Spotify" },
-  { href: "https://music.apple.com/au/album/key-grip-ep/1791267851", icon: <AppleMusicLogo />, text: "Apple Music" },
-  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo />, text: "Bandcamp" }
+  { href: "https://open.spotify.com/album/5zutq2A3LBhTqHwewMxjsg?si=mRo3ZLT7Q_uHKItod-Q-jA", icon: <SpotifyLogo />, text: "Spotify" },
+  { href: "https://music.apple.com/au/album/key-grip-ep/1794459240", icon: <AppleMusicLogo />, text: "Apple Music" },
+  { href: "https://keygripmusic.bandcamp.com/album/key-grip-2", icon: <BandcampLogo />, text: "Bandcamp" }
 ];
-
-const FONTS = [
-  adramalech.className,
-  albemarle.className,
-  celticsea.className,
-  durendal.className,
-  fuse.className,
-  minima.className,
-  norumbega.className,
-  scurlock.className,
-];
-
-// RandomFontTitle Component
-const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
-  const [charStyles, setCharStyles] = useState<string[]>([]);
-  const [chars] = useState(() => title.split(""));
-
-  const getRandomFontClass = () => {
-    const randomFont = FONTS[Math.floor(Math.random() * FONTS.length)];
-    const textSizes = ['text-6xl', 'text-7xl', 'text-8xl'];
-    const randomSize = textSizes[Math.floor(Math.random() * textSizes.length)];
-    return `${randomFont} ${randomSize}`;
-  };
-
-  useEffect(() => {
-    setCharStyles(chars.map(getRandomFontClass));
-    const interval = setInterval(() => {
-      setCharStyles(prev => prev.map((_, i) =>
-        Math.random() < 0.1 ? getRandomFontClass() : prev[i]
-      ));
-    }, 300);
-
-    return () => clearInterval(interval);
-  }, [chars]);
-
-  return (
-    <h1 className="text-white text-left leading-[0.8] my-4">
-      {chars.map((char, i) => (
-        <span key={i} className={`inline-block ${charStyles[i]}`} aria-hidden="true">
-          {char}
-        </span>
-      ))}
-      <span className="sr-only">{title}</span>
-    </h1>
-  );
-};
 
 // Main EpPage Component
 const EpPage: React.FC = () => {
-  const [isPlayerVisible, setIsPlayerVisible] = useState(true);
 
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
-      <VideoBackground videoPath="/videos/walking_in_circles.mp4" />
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-[1]" />
+    <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
+      <VideoBackground videoPath={getVideoURL("walking_in_circles")} />
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-20">
         <BurgerBar fixed={false} />
 
         <section className="mx-4 sm:mx-8 md:mx-16 lg:mx-24 pt-12 grid gap-5">
@@ -122,23 +76,14 @@ const EpPage: React.FC = () => {
           </div>
 
           {/* Audio Player Section */}
-          <AudioPlayer
-            tracks={TRACKS}
-            onClosePlayer={() => setIsPlayerVisible(false)}
-          />
+          <AudioPlayer tracks={TRACKS} />
 
           {/* Description Section */}
           <div className="grid grid-cols-1 max-w-4xl mx-auto gap-6 my-8">
             <div className="space-y-6">
               <blockquote className="text-neutral-300 space-y-4">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis aliquam ipsum, vel fringilla nibh tincidunt sed. Vivamus vel massa est. Nunc erat nunc, tempus vel auctor sed, sollicitudin ut turpis. Duis vehicula mi diam, et tincidunt enim volutpat vel.
-                </p>
-                <p>
-                  Quisque enim nibh, laoreet in nisi id, dignissim posuere sem. In non diam ut velit maximus suscipit. Integer non elementum dolor. Sed ultricies nisi sit amet lectus faucibus commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
-                <p>
-                  Pellentesque justo magna, faucibus vel sodales in, posuere sed nulla. Pellentesque ut nibh eget diam posuere laoreet. Nullam pretium non ipsum ut venenatis. Nulla blandit hendrerit eros, eu pretium lacus fermentum at. Sed eget maximus libero.
+                  This Ep is made entirely from the first EP's final masters. 
                 </p>
               </blockquote>
             </div>

@@ -1,19 +1,19 @@
 import clsx from "clsx";
-import { Instagram, Twitter, Youtube } from "lucide-react"; 
+import { Instagram, Youtube } from "lucide-react"; 
 import Image from "next/image";
 
 const WhiteBandcamplogo = () => (
 	<img
-	  src="/photos/white_bandcamp_icon.png"
+	  src="/photos/Bandcamp_white2.png"
 	  alt="Music"
-	  className="w-9 h-9"
+	  className="h-8 w-8 md:w-10 md:h-10 max-w-[6vw] max-h-[6vw] object-contain"
 	/>
   )
 
 const LINKS = [
-  { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/yourhandle" },
   { label: "Spotify", icon: <Spotify />, href: "https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl" },
+  { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Apple Music", icon: <AppleMusic />, href: "https://music.apple.com/artist/key-grip/1670242625" },
   { label: "YouTube", icon: <Youtube size={20} />, href: "https://www.youtube.com/@keygripmusic" },
 ];
@@ -39,3 +39,43 @@ function Spotify() {
 function AppleMusic() {
   return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" stroke="currentColor" strokeWidth="0" strokeLinecap="round" strokeLinejoin="round"><path d="M 6 3 C 4.3519316 3 3 4.3519316 3 6 L 3 18 C 3 19.648068 4.3519316 21 6 21 L 18 21 C 19.648068 21 21 19.648068 21 18 L 21 6 C 21 4.3519316 19.648068 3 18 3 L 6 3 z M 6 4.5 L 18 4.5 C 18.837932 4.5 19.5 5.1620684 19.5 6 L 19.5 18 C 19.5 18.837932 18.837932 19.5 18 19.5 L 6 19.5 C 5.1620684 19.5 4.5 18.837932 4.5 18 L 4.5 6 C 4.5 5.1620684 5.1620684 4.5 6 4.5 z M 15.072266 6.6816406 L 10.035156 7.6816406 C 9.6601562 7.7566406 9.3877188 8.0887031 9.3867188 8.4707031 C 9.3867188 8.4707031 9.3652344 13.347938 9.3652344 13.710938 C 9.3652344 14.078938 9.0195 14.132812 8.8125 14.132812 C 7.7955 14.132812 6.8691406 14.926828 6.8691406 15.798828 C 6.8691406 16.746828 7.4827344 17.291016 8.5527344 17.291016 C 9.9787344 17.291016 10.496094 16.157484 10.496094 15.396484 L 10.496094 10.740234 C 10.496094 10.709234 10.518828 10.681781 10.548828 10.675781 L 14.779297 9.8046875 C 14.789297 10.643688 14.814453 12.229094 14.814453 12.496094 C 14.814453 12.874094 14.709344 13.078125 14.152344 13.078125 C 12.990344 13.078125 12.296875 13.955688 12.296875 14.804688 C 12.296875 15.741687 13.320531 16.210938 13.894531 16.210938 C 15.550531 16.210938 15.988281 14.833469 15.988281 14.105469 L 15.988281 7.4316406 C 15.987281 7.2016406 15.885031 6.9858437 15.707031 6.8398438 C 15.528031 6.6938438 15.297266 6.6346406 15.072266 6.6816406 z" /></svg>
 }
+
+export const SpotifyLogo = () => {
+	return <img
+	  src="photos/Spotify_Primary_Logo_RGB_White.png"
+	  alt="Music"
+	  className="w-6 h-6"
+	/>
+  }
+  
+export const AppleMusicLogo = () => (
+	<img
+	  src="photos/Apple_Music_icon.png"
+	  alt="Music"
+	  className="w-6 h-6"
+	/>
+  )
+  
+export const BandcampLogo = () => (
+	<img
+	  src="photos/bandcamp-icon.png"
+	  alt="Music"
+	  className="w-6 h-6"
+	/>
+  )
+  
+export const InstagramLogo = () => (
+	<img
+	  src='photos/Instagram_icon.png'
+	  alt="Instagram"
+	  className='w-6 h-6'
+	/>
+  )
+  
+export const TikTokLogo = () => (
+	<img
+	  src='photos/tiktok_logo.webp'
+	  alt="Instagram"
+	  className='w-6 h-6'
+	/>
+  )

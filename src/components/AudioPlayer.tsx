@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { Download, Pause, Play, SkipBack, SkipForward, Volume2, VolumeX, X } from 'lucide-react';
 
@@ -10,7 +11,6 @@ export interface Track {
 
 interface AudioPlayerProps {
   tracks: Track[];
-  onClosePlayer?: () => void;
 }
 
 const formatTime = (time: number): string => {
@@ -20,7 +20,7 @@ const formatTime = (time: number): string => {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 };
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks }) => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -33,7 +33,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
   const loadingTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const currentTrack = currentTrackIndex !== null ? tracks[currentTrackIndex] : null;
-  
+
   // Only show loading if we haven't loaded this track before
   const shouldShowLoading = isLoading && currentTrackIndex !== null && !loadedTracks.has(currentTrackIndex);
 
@@ -60,6 +60,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
       setIsPlaying(false);
       // Auto-play next track if available
       if (currentTrackIndex !== null && currentTrackIndex < tracks.length - 1) {
+        setCurrentTime(0);
         setCurrentTrackIndex(currentTrackIndex + 1);
         setIsPlaying(true);
       }
@@ -80,11 +81,36 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
         setIsLoading(true);
       }, 150);
     };
-    const handleError = (e: ErrorEvent) => {
-      setError("Failed to load audio. Please try again.");
+    const handleError = (e: any) => {
+      console.error('Audio error:', e);
+
+      let error_message = 'failed to load audio. please try again.';
+      const error_code = e.target.error?.code;
+
+      switch (error_code) {
+        case MediaError.MEDIA_ERR_ABORTED:
+          error_message = 'playback aborted by user.';
+          break;
+        case MediaError.MEDIA_ERR_NETWORK:
+          error_message = 'network error occurred.';
+          break;
+        case MediaError.MEDIA_ERR_DECODE:
+          error_message = 'audio decoding error. the file might be corrupted.';
+          break;
+        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+          error_message = 'audio format not supported.';
+          break;
+        default:
+          error_message = 'an unexpected error occurred.';
+          break;
+      }
+
+      //log to console for further inspection
+      console.error("mediaerror code:", error_code);
+      console.error("full mediaerror object", e.target.error);
+      setError(error_message);
       setIsLoading(false);
       setIsPlaying(false);
-      console.error("Audio error:", e);
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -111,7 +137,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         // Only set src and load if it's a new track
         const newSrc = tracks[currentTrackIndex].src;
         if (audioRef.current!.src !== new URL(newSrc, window.location.href).href) {
@@ -192,14 +218,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
 
     handleSeek: (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!audioRef.current) return;
-      const time = Number(e.target.value);
-      audioRef.current.currentTime = time;
+      let time = Number(e.target.value);
+      if (time >= duration) time = duration - 0.1;
+      audioRef.current.currentTime = Math.min(time, duration);
       setCurrentTime(time);
     },
 
     playPrevious: () => {
       if (currentTrackIndex !== null && currentTrackIndex > 0) {
         setCurrentTrackIndex(currentTrackIndex - 1);
+        setCurrentTime(0);
         setIsPlaying(true);
       }
     },
@@ -207,6 +235,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
     playNext: () => {
       if (currentTrackIndex !== null && currentTrackIndex < tracks.length - 1) {
         setCurrentTrackIndex(currentTrackIndex + 1);
+        setCurrentTime(0);
         setIsPlaying(true);
       }
     }
@@ -216,8 +245,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
     <div className="audio-player" role="region" aria-label="Audio player">
       <div className="song-list-container">
         {tracks.map((track, index) => (
-          <div 
-            key={track.id} 
+          <div
+            key={track.id}
             className="song-item"
             role="listitem"
           >
@@ -266,28 +295,25 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ tracks, onClosePlayer }) => {
               <span className="time-display" role="timer" aria-label="Time">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </span>
-              {onClosePlayer && (
-                <button
-                  onClick={() => {
-                    if (audioRef.current) {
-                      audioRef.current.pause();
-                    }
-                    setIsPlaying(false);
-                    setCurrentTrackIndex(null);
-                    onClosePlayer();
-                  }}
-                  className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors ml-4"
-                  aria-label="Close audio player"
-                >
-                  <X size={20} />
-                </button>
-              )}
+              <button
+                onClick={() => {
+                  if (audioRef.current) {
+                    audioRef.current.pause();
+                  }
+                  setIsPlaying(false);
+                  setCurrentTrackIndex(null);
+                }}
+                className="p-2 text-neutral-400 hover:text-neutral-600 transition-colors ml-4"
+                aria-label="Close audio player"
+              >
+                <X size={20} />
+              </button>
             </div>
 
             <input
               type="range"
-              value={currentTime}
-              max={duration || 0}
+              value={Math.min(currentTime, duration ?? 0)}
+              max={duration ?? 0}
               onChange={controls.handleSeek}
               className="seek-slider"
               aria-label="Seek"

@@ -1,51 +1,12 @@
 'use client'
 
 import React from 'react';
-import { Music, Instagram, Globe, Mail } from 'lucide-react';
+import { Globe, Mail } from 'lucide-react';
 import Image from 'next/image';
 import { EPLink } from '@/components/burger-bar';
+import { AppleMusicLogo, BandcampLogo, InstagramLogo, SpotifyLogo, TikTokLogo } from '@/components/socials';
 
 
-
-export const SpotifyLogo = () => {
-  return <img
-    src="photos/Spotify_Primary_Logo_RGB_White.png"
-    alt="Music"
-    className="w-6 h-6"
-  />
-}
-
-export const AppleMusicLogo = () => (
-  <img
-    src="photos/Apple_Music_icon.png"
-    alt="Music"
-    className="w-6 h-6"
-  />
-)
-
-export const Bandcamplogo = () => (
-  <img
-    src="photos/bandcamp-icon.png"
-    alt="Music"
-    className="w-6 h-6"
-  />
-)
-
-const InstagramLogo = () => (
-  <img
-    src='photos/Instagram_icon.png'
-    alt="Instagram"
-    className='w-6 h-6'
-  />
-)
-
-const TikTokLogo = () => (
-  <img
-    src='photos/tiktok_logo.webp'
-    alt="Instagram"
-    className='w-6 h-6'
-  />
-)
 
 const MusicianLandingPage = () => {
   const links = [
@@ -64,7 +25,7 @@ const MusicianLandingPage = () => {
     {
       title: 'Bandcamp',
       url: 'https://keygripmusic.bandcamp.com/',
-      icon: <Bandcamplogo />,
+      icon: <BandcampLogo />,
       color: 'bg-blue-500 text-white'
     },
     {
@@ -93,7 +54,7 @@ const MusicianLandingPage = () => {
     }
   ];
 
-  const handleClick = (url, e) => {
+  const handleClick = (url: string, e: any) => {
     e.preventDefault();
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -106,7 +67,7 @@ const MusicianLandingPage = () => {
       }}
     >
       <nav className="fixed top-4 px-10 text-neutral-50 text-2xl z-[500] h-10 drop-shadow-md">
-        <EPLink label="Home" href="/" />
+        <EPLink label="Home" href="/" image={null} />
       </nav>
       <div className="absolute inset-0 bg-black/40"></div>
 
