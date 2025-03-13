@@ -29,9 +29,9 @@ interface PlayLink {
 }
 
 const PLAY_LINKS: PlayLink[] = [
-  { href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH?si=-JK4Sy72SKy8ucVt_8Q-Jw", icon: <SpotifyLogo />, text: "Spotify" },
-  { href: "https://music.apple.com/au/album/key-grip-ep/1791267851", icon: <AppleMusicLogo />, text: "Apple Music" },
-  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo />, text: "Bandcamp" }
+  { href: "https://open.spotify.com/album/5zutq2A3LBhTqHwewMxjsg?si=mRo3ZLT7Q_uHKItod-Q-jA", icon: <SpotifyLogo />, text: "Spotify" },
+  { href: "https://music.apple.com/au/album/key-grip-ep/1794459240", icon: <AppleMusicLogo />, text: "Apple Music" },
+  { href: "https://keygripmusic.bandcamp.com/album/key-grip-2", icon: <Bandcamplogo />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component
@@ -82,13 +82,7 @@ const EpPage: React.FC = () => {
             <div className="space-y-6">
               <blockquote className="text-neutral-300 space-y-4">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis aliquam ipsum, vel fringilla nibh tincidunt sed. Vivamus vel massa est. Nunc erat nunc, tempus vel auctor sed, sollicitudin ut turpis. Duis vehicula mi diam, et tincidunt enim volutpat vel.
-                </p>
-                <p>
-                  Quisque enim nibh, laoreet in nisi id, dignissim posuere sem. In non diam ut velit maximus suscipit. Integer non elementum dolor. Sed ultricies nisi sit amet lectus faucibus commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                </p>
-                <p>
-                  Pellentesque justo magna, faucibus vel sodales in, posuere sed nulla. Pellentesque ut nibh eget diam posuere laoreet. Nullam pretium non ipsum ut venenatis. Nulla blandit hendrerit eros, eu pretium lacus fermentum at. Sed eget maximus libero.
+                  This Ep is made entirely from the first EP's final masters. 
                 </p>
               </blockquote>
             </div>
