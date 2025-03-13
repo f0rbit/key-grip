@@ -11,7 +11,7 @@ const WhiteBandcamplogo = () => (
   )
 
 const LINKS = [
-  { label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/yourhandle" },
+  { label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/keygripmusic" },
   { label: "Spotify", icon: <Spotify />, href: "https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl" },
   { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Apple Music", icon: <AppleMusic />, href: "https://music.apple.com/artist/key-grip/1670242625" },
