@@ -29,9 +29,9 @@ interface PlayLink {
 }
 
 const PLAY_LINKS: PlayLink[] = [
-	{ href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH?si=-JK4Sy72SKy8ucVt_8Q-Jw", icon: <SpotifyLogo />, text: "Spotify" },
-	{ href: "https://music.apple.com/au/album/key-grip-ep/1791267851", icon: <AppleMusicLogo />, text: "Apple Music" },
-	{ href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <BandcampLogo />, text: "Bandcamp" }
+	{ href: "https://open.spotify.com/album/723SLWIQo27r48H1b6nfcG?si=YZAQzwLJTZaaX6G56CKFxQ", icon: <SpotifyLogo />, text: "Spotify" },
+	{ href: "https://music.apple.com/au/album/key-grip-presents-ep/1798653758", icon: <AppleMusicLogo />, text: "Apple Music" },
+	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <BandcampLogo />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component

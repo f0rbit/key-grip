@@ -4,16 +4,16 @@ import Image from "next/image";
 
 const WhiteBandcamplogo = () => (
 	<img
-	  src="/photos/white_bandcamp_icon.png"
+	  src="/photos/Bandcamp_white2.png"
 	  alt="Music"
-	  className="w-9 h-9"
+	  className="h-8 w-8 md:w-10 md:h-10 max-w-[6vw] max-h-[6vw] object-contain"
 	/>
   )
 
 const LINKS = [
-  { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Instagram", icon: <Instagram size={20} />, href: "https://instagram.com/yourhandle" },
   { label: "Spotify", icon: <Spotify />, href: "https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl" },
+  { label: "Bandcamp", icon: <WhiteBandcamplogo />, href: "https://keygripmusic.bandcamp.com/" },
   { label: "Apple Music", icon: <AppleMusic />, href: "https://music.apple.com/artist/key-grip/1670242625" },
   { label: "YouTube", icon: <Youtube size={20} />, href: "https://www.youtube.com/@keygripmusic" },
 ];
