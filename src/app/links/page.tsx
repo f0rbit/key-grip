@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Instagram } from "lucide-react";
 import { EPLink } from '@/components/burger-bar';
+import { AppleMusic, Spotify } from '@/components/socials';
 
 export const Bandcamplogo = ({ className }: { className: string }) => (
   <img
@@ -21,19 +22,11 @@ export const TikTok = () => (
   />
 )
 
-function Spotify() {
-  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" height="48px" fill="currentColor"><path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z" /></svg>;
-}
-
-function AppleMusic() {
-  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" height="48px" fill="currentColor"><path d="M 6 3 C 4.3519316 3 3 4.3519316 3 6 L 3 18 C 3 19.648068 4.3519316 21 6 21 L 18 21 C 19.648068 21 21 19.648068 21 18 L 21 6 C 21 4.3519316 19.648068 3 18 3 L 6 3 z" /></svg>;
-}
-
 const MusicianLandingPage = () => {
   const links = [
     { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-green-500' },
     { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-rose-500' },
-    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-12 h-12' />, color: 'bg-blue-500' },
+    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-8 h-8' />, color: 'bg-blue-500' },
     { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-purple-500' },
     { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
   ];
