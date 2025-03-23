@@ -13,13 +13,6 @@ export const Bandcamplogo = () => (
   />
 )
 
-export const TikTok = () => (
-  <img
-    src="photos/tiktokWhite.png"
-    alt="Music"
-    className="w-12 h-12 object-contain"
-  />
-)
 
 function Spotify() {
   return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48px" height="48px" fill="currentColor"><path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z" /></svg>;
@@ -31,11 +24,10 @@ function AppleMusic() {
 
 const MusicianLandingPage = () => {
   const links = [
-    { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-green-500' },
-    { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-rose-500' },
-    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo />, color: 'bg-blue-500' },
-    { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-purple-500' },
-    { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
+    { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-[#2D4D31]' },
+    { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-[#AB0F27]' },
+    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo />, color: 'bg-[#277DA2]' },
+    { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-[#872B84]' },
   ];
 
   const handleClick = (url: string, e: any) => {
@@ -59,7 +51,7 @@ const MusicianLandingPage = () => {
             <h1 className="text-3xl font-bold mb-2 text-white">Key Grip</h1>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
             {links.map((link) => (
               <button
                 key={link.title}
