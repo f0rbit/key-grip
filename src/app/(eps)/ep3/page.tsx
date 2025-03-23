@@ -41,7 +41,7 @@ function AppleMusic() {
 const PLAY_LINKS: PlayLink[] = [
 	{ href: "https://open.spotify.com/album/723SLWIQo27r48H1b6nfcG?si=YZAQzwLJTZaaX6G56CKFxQ", icon: <Spotify />, text: "Spotify" },
 	{ href: "https://music.apple.com/au/album/key-grip-presents-ep/1798653758", icon: <AppleMusic />, text: "Apple Music" },
-	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo />, text: "Bandcamp" }
+	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo className='w-4 h-4' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component
@@ -60,7 +60,7 @@ const EpPage: React.FC = () => {
 					{/* Album Header Section */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
 						{/* Album Cover */}
-						<div className="relative w-full max-w-[400px] aspect-square">
+						<div className="relative w-full max-w-[400px] aspect-square m-auto">
 							<Image
 								src={Ep3CoverArt}
 								alt="Key Grip EP 3 album cover artwork"

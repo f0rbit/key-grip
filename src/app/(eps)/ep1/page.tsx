@@ -42,7 +42,7 @@ function Spotify() {
 const PLAY_LINKS: PlayLink[] = [
   { href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH", icon: <Spotify />, text: "Spotify" },
   { href: "https://music.apple.com/au/album/key-grip-ep/1791267851", icon: <AppleMusic />, text: "Apple Music" },
-  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo />, text: "Bandcamp" }
+  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo className='w-4 h-4' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component
@@ -61,7 +61,7 @@ const EpPage: React.FC = () => {
           {/* Album Header Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
             {/* Album Cover */}
-            <div className="relative w-full max-w-[400px] aspect-square">
+            <div className="relative w-full max-w-[400px] aspect-square m-auto">
               <Image
                 src={Ep1CoverArt}
                 alt="Key Grip EP album cover artwork"
