@@ -61,7 +61,7 @@ const EpPage: React.FC = () => {
           {/* Album Header Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
             {/* Album Cover */}
-            <div className="relative w-full max-w-[400px] aspect-square">
+            <div className="relative w-full max-w-[400px] aspect-square m-auto">
               <Image
                 src={Ep1CoverArt}
                 alt="Key Grip EP album cover artwork"

@@ -50,7 +50,7 @@ export const RandomFontTitle: React.FC<{ title: string }> = ({ title }) => {
 
   const getRandomFontClass = () => {
     const randomFont = FONTS[Math.floor(Math.random() * FONTS.length)];
-    const textSizes = ['text-[3rem]', 'text-[3.5rem]', 'text-[4rem]'];
+    const textSizes = ['text-[8vw] md:text-[3rem]', 'text-[8.5vw] md:text-[3.5rem]', 'text-[9vw] md:text-[4rem]'];
     const randomSize = textSizes[Math.floor(Math.random() * textSizes.length)];
     return `${randomFont} ${randomSize}`;
   };

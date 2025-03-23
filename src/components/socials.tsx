@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { Instagram, Youtube } from "lucide-react"; 
-import Image from "next/image";
 
 const WhiteBandcamplogo = () => (
 	<img
