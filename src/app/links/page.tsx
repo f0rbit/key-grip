@@ -5,31 +5,37 @@ import Image from 'next/image';
 import { Instagram } from "lucide-react";
 import { EPLink } from '@/components/burger-bar';
 import { AppleMusic, Spotify } from '@/components/socials';
+import { PlayLink, PlaySection } from '@/components/audio-player';
+
 
 export const Bandcamplogo = ({ className }: { className: string }) => (
-  <img
-    src="photos/Bandcamp_white2.png"
-    alt="Music"
-    className={"object-contain " + className}
-  />
-)
+	<img
+	  src="photos/Bandcamp_white2.png"
+	  alt="Music"
+	  className={"object-contain " + className}
+	/>
+  )
+
+
 
 export const TikTok = () => (
-  <img
-    src="photos/tiktokWhite.png"
-    alt="Music"
-    className="w-12 h-12 object-contain"
-  />
-)
+	<img
+	  src="photos/tiktokWhite.png"
+	  alt="Music"
+	  className="w-12 h-12 object-contain"
+	/>
+  )
+
+const links: PlayLink[] = [
+	{ text: 'Spotify', href: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />},
+    { text: 'Apple Music', href: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, },
+    { text: 'Bandcamp', href: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-8 h-8' />, },
+    { text: 'Instagram', href: 'https://www.instagram.com/keygripmusic/', icon: <Instagram /> },
+    { text: 'TikTok', href: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />  },
+]
+
 
 const MusicianLandingPage = () => {
-  const links = [
-    { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-green-500' },
-    { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-rose-500' },
-    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-8 h-8' />, color: 'bg-blue-500' },
-    { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-purple-500' },
-    { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
-  ];
 
   const handleClick = (url: string, e: any) => {
     e.preventDefault();
@@ -51,19 +57,7 @@ const MusicianLandingPage = () => {
             </div>
             <h1 className="text-3xl font-bold mb-2 text-white">Key Grip</h1>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-[7vw] sm:text-base">
-            {links.map((link) => (
-              <button
-                key={link.title}
-                onClick={(e) => handleClick(link.url, e)}
-                className={`w-full aspect-square flex flex-col items-center justify-center rounded-lg ${link.color} text-white backdrop-blur-sm hover:opacity-90 transition-opacity cursor-pointer`}
-              >
-                {link.icon}
-                <span className="mt-2 font-medium text-center">{link.title}</span>
-              </button>
-            ))}
-          </div>
+			<PlaySection links={links} />
 
           <footer className="mt-12 text-center text-gray-300">
             <p>© 2025 Key Grip. All rights reserved.</p>

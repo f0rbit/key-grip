@@ -196,7 +196,7 @@ export const AudioPlayer = ({ tracks }: { tracks: Track[] }) => {
   );
 }
 
-interface PlayLink {
+export interface PlayLink {
   href: string;
   icon: React.ReactNode;
   text: string;
