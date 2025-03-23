@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep3CoverArt from "~/public/photos/KGPresentsCover.png";
 import Image from "next/image";
@@ -11,15 +11,17 @@ import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
+import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL, getVideoURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [// TODO: add new songs
-	{ id: 1, title: "Arrival", src: "/music/KGPresentsMasters/Arrival.wav" },
-	{ id: 2, title: "Pruned Fruit", src: "/music/KGPresentsMasters/Pruned_Fruit.wav" },
-	{ id: 3, title: "Hi Basil", src: "/music/KGPresentsMasters/Hi_Basil.wav"},
-	{ id: 4, title: "The Dog And The Martyr", src: "/music/KGPresentsMasters/TDATM.wav"},
-	{ id: 5, title: "They Sleep Tonight", src:  "/music/KGPresentsMasters/They_Sleep_Tonight.wav"},
-	{ id: 6, title: "Her House", src:  "/music/KGPresentsMasters/Her_House.wav"}
+	{ id: 1, title: "Arrival", src: getSongURL("ep3", "arrival")  },
+	{ id: 2, title: "Pruned Fruit", src: getSongURL("ep3", "pruned_fruit")  },
+	{ id: 3, title: "Hi Basil", src: getSongURL("ep3", "hi_basil") },
+	{ id: 4, title: "The Dog And The Martyr", src: getSongURL("ep3", "tdatm") },
+	{ id: 5, title: "They Sleep Tonight", src: getSongURL("ep3", "they_sleep_tonight") },
+	{ id: 6, title: "Her House", src: getSongURL("ep3", "her_house") }
 ];
 
 interface PlayLink {
@@ -47,7 +49,7 @@ const EpPage: React.FC = () => {
 
 	return (
 		<main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-			<VideoBackground videoPath="/videos/walking_in_circles.mp4" />
+			<VideoBackground videoPath={getVideoURL("walking_in_circles")} />
 			<div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
 			{/* Main Content */}

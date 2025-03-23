@@ -11,7 +11,7 @@ import EP3CoverArt from "~/public/photos/KGPresentsCover.png"
 export const BurgerContext = createContext({
   open: false,
   toggle: () => { },
-  setOpen: (open: boolean) => { },
+  setOpen: (_: boolean) => {},
 });
 
 const MENU_LINKS = [

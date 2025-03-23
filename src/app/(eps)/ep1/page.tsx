@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
@@ -11,15 +11,17 @@ import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
+import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [
-  { id: 1, title: "Kalybaba", src: "/music/Kalybaba.wav" },
-  { id: 2, title: "Orbit", src: "/music/Orbit.wav" },
-  { id: 3, title: "Razed Edge", src: "/music/Razed_Edge.wav" },
-  { id: 4, title: "Beginning To Forget", src: "/music/beginning_to_forget.wav" },
-  { id: 5, title: "Acoustiic", src: "/music/Acoustiic.wav" },
-  { id: 6, title: "No Build", src: "/music/No_Build.wav" }
+  { id: 1, title: "Kalybaba", src: getSongURL("ep1", "kalybaba") },
+  { id: 2, title: "Orbit", src: getSongURL("ep1", "orbit") },
+  { id: 3, title: "Razed Edge", src: getSongURL("ep1", "razed_edge") },
+  { id: 4, title: "Beginning To Forget", src: getSongURL("ep1", "beginning_to_forget") },
+  { id: 5, title: "Acoustiic", src: getSongURL("ep1", "acoustiic") },
+  { id: 6, title: "No Build", src: getSongURL("ep1", "no_build") }
 ];
 
 interface PlayLink {
@@ -93,19 +95,19 @@ const EpPage: React.FC = () => {
               <blockquote className="text-neutral-300 space-y-4">
               <p className="text-2xl text-neutral-200 mt-6">★★★★ - duncanreviews March 16 2023 </p>
                 <p className="text-xl italic text-neutral-200">
-                  "Following the map to a grand new frontier"
+                  {`"Following the map to a grand new frontier"`}
                 </p>
 
                 <p>
-                  The year is still young when it comes to EPs released in 2023, but it seems as though
+                  {`The year is still young when it comes to EPs released in 2023, but it seems as though
                   Key Grip have already leapfrogged ahead of the competition to land a spot amid the best
                   of the best. This Australian outfit is still too young to be defined by a single genre,
                   much less a general handful of them, but the duo's first artwork is a highly interesting
-                  introduction and an appropriately self-titled gem. Key Grip...? is something to take pride in.
+                  introduction and an appropriately self-titled gem. Key Grip...? is something to take pride in.`}
                 </p>
 
                 <p>
-                  With the band themselves having claimed influences such as Jockstrap and JPEGMafia,
+                  {`With the band themselves having claimed influences such as Jockstrap and JPEGMafia,
                   the six-track Key Grip debut is futuristic yet digestible. The initial drums and glitches
                   of Kalybaba set a high standard for production quality, and all twenty-one minutes of
                   the experience keep this energy alive. Deep vocals lead into ethereal synths on this
@@ -113,23 +115,23 @@ const EpPage: React.FC = () => {
                   into heavy industrial hip hop territory for a moment before calming down again and
                   shapeshifting into the cool pop-oriented breeze of Orbit. These sparkly quick-paced
                   synths contrast nicely with the chaotic collage at the end of Razed Edge, showing off
-                  the layers of Key Grip's range while staying consistent in an overall climate.
+                  the layers of Key Grip's range while staying consistent in an overall climate.`}
                 </p>
 
                 <p>
-                  Beginning to Forget is something of an interlude, or at least the odd one out in terms
+                  {`Beginning to Forget is something of an interlude, or at least the odd one out in terms
                   of timespan, but a soaring assembly of classical elements make this much more than a
                   mere jingle. Acoustiic lives up to its name with a sparse unplugged style, but the
                   autotuned singing is surprisingly moving and even avant-garde among the breaks of quiet.
-                  No Build comes full circle by recycling almost every little dreamy sound that cropped up before.
+                  No Build comes full circle by recycling almost every little dreamy sound that cropped up before.`}
                 </p>
 
                 <p>
-                  In addition to the musical twosome's cited icons, Key Grip's maiden voyage is reminiscent
+                  {`In addition to the musical twosome's cited icons, Key Grip's maiden voyage is reminiscent
                   of acts like Quadeca, whose breakout LP I Didn't Mean to Haunt You featured a comparable
                   array of experiments with soulful R&B and instrumental electronica. If the duo continue
                   in this direction of humble ambition, their talents are sure to spread in a similar
-                  fashion to some of the greatest acts of the 2020s.
+                  fashion to some of the greatest acts of the 2020s.`}
                 </p>
               </blockquote>
             </div>
@@ -141,11 +143,11 @@ const EpPage: React.FC = () => {
                 </p>
 
                 <p>
-                  the production here is absolutely insane, like it's genuinely hard to fathom how good it sounds, however i believe this ep falls short for a few reasons. it's clear that this duo is full to bursting with ideas, which i can relate to and respect, but i think that they used this EP as more of a showcase of ability and excitement to be creating rather than a homogenized, cohesive experience.
+                  {`the production here is absolutely insane, like it's genuinely hard to fathom how good it sounds, however i believe this ep falls short for a few reasons. it's clear that this duo is full to bursting with ideas, which i can relate to and respect, but i think that they used this EP as more of a showcase of ability and excitement to be creating rather than a homogenized, cohesive experience.`}
                 </p>
 
                 <p>
-                  not a lot of the ideas end up sticking simply because they're washed away in a sonic experience that is worlds different by the next song. i also cannot stand the vocals. it's clear that their vocalist has talent, however, on this project they do not stick the landing with even a single performance, often devolving into seemingly undeserved croon-wailing. this unfortunately takes something that could have been incredible and makes it difficult to return to for me. i really hope this group continues their output though, because i can hear the makings of some life changing.
+                  {`not a lot of the ideas end up sticking simply because they're washed away in a sonic experience that is worlds different by the next song. i also cannot stand the vocals. it's clear that their vocalist has talent, however, on this project they do not stick the landing with even a single performance, often devolving into seemingly undeserved croon-wailing. this unfortunately takes something that could have been incredible and makes it difficult to return to for me. i really hope this group continues their output though, because i can hear the makings of some life changing.`}
                 </p>
               </blockquote>
             </div>

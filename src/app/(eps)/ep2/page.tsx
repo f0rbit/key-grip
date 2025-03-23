@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep2CoverArt from "~/public/ep2-cover.png";
 import Image from "next/image";
@@ -11,15 +11,17 @@ import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
+import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { getSongURL, getVideoURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [
-  { id: 1, title: "This", src: "/music/This.wav" },
-  { id: 2, title: "is", src: "/music/is.wav" },
-  { id: 3, title: "just", src: "/music/just.wav" },
-  { id: 4, title: "the", src: "/music/the.wav" },
-  { id: 5, title: "first", src: "/music/first.wav" },
-  { id: 6, title: "EP", src: "/music/EP.wav" }
+  { id: 1, title: "This", src: getSongURL("ep2", "this") },
+  { id: 2, title: "is", src: getSongURL("ep2", "is") },
+  { id: 3, title: "just", src: getSongURL("ep2", "just") },
+  { id: 4, title: "the", src: getSongURL("ep2", "the") },
+  { id: 5, title: "first", src: getSongURL("ep2", "first") },
+  { id: 6, title: "EP", src: getSongURL("ep2", "ep") }
 ];
 
 interface PlayLink {
@@ -48,7 +50,7 @@ const EpPage: React.FC = () => {
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-      <VideoBackground videoPath="/videos/walking_in_circles.mp4" />
+      <VideoBackground videoPath={getVideoURL("walking_in_circles")} />
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
       {/* Main Content */}

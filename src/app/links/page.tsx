@@ -38,7 +38,7 @@ const MusicianLandingPage = () => {
     { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
   ];
 
-  const handleClick = (url, e) => {
+  const handleClick = (url: string, e: any) => {
     e.preventDefault();
     window.open(url, '_blank', 'noopener,noreferrer');
   };
