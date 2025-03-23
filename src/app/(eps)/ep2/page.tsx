@@ -42,7 +42,7 @@ function Spotify() {
 const PLAY_LINKS: PlayLink[] = [
   { href: "https://open.spotify.com/album/5zutq2A3LBhTqHwewMxjsg?si=mRo3ZLT7Q_uHKItod-Q-jA", icon: <Spotify />, text: "Spotify" },
   { href: "https://music.apple.com/au/album/key-grip-ep/1794459240", icon: <AppleMusic />, text: "Apple Music" },
-  { href: "https://keygripmusic.bandcamp.com/album/key-grip-2", icon: <Bandcamplogo />, text: "Bandcamp" }
+  { href: "https://keygripmusic.bandcamp.com/album/key-grip-2", icon: <Bandcamplogo className='w-4 h-4' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component

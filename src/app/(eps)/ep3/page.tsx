@@ -41,7 +41,7 @@ function AppleMusic() {
 const PLAY_LINKS: PlayLink[] = [
 	{ href: "https://open.spotify.com/album/723SLWIQo27r48H1b6nfcG?si=YZAQzwLJTZaaX6G56CKFxQ", icon: <Spotify />, text: "Spotify" },
 	{ href: "https://music.apple.com/au/album/key-grip-presents-ep/1798653758", icon: <AppleMusic />, text: "Apple Music" },
-	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo />, text: "Bandcamp" }
+	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo className='w-4 h-4' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component

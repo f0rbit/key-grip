@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { Instagram } from "lucide-react";
 import { EPLink } from '@/components/burger-bar';
 
-export const Bandcamplogo = () => (
+export const Bandcamplogo = ({ className }: { className: string }) => (
   <img
     src="photos/Bandcamp_white2.png"
     alt="Music"
-    className="w-12 h-12 object-contain"
+    className={"object-contain " + className}
   />
 )
 
@@ -33,7 +33,7 @@ const MusicianLandingPage = () => {
   const links = [
     { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-green-500' },
     { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-rose-500' },
-    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo />, color: 'bg-blue-500' },
+    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-12 h-12' />, color: 'bg-blue-500' },
     { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-purple-500' },
     { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
   ];
