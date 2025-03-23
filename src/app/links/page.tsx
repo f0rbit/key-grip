@@ -33,28 +33,7 @@ const links: PlayLink[] = [
 ]
 
 
-const links: PlayLink[] = [
-	{ text: 'Spotify', href: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />},
-    { text: 'Apple Music', href: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, },
-    { text: 'Bandcamp', href: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-8 h-8' />, },
-    { text: 'Instagram', href: 'https://www.instagram.com/keygripmusic/', icon: <Instagram /> },
-    { text: 'TikTok', href: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />  },
-]
-
-
 const MusicianLandingPage = () => {
-  const links = [
-    { title: 'Spotify', url: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320', icon: <Spotify />, color: 'bg-green-500' },
-    { title: 'Apple Music', url: 'https://music.apple.com/au/artist/key-grip/1670242625', icon: <AppleMusic />, color: 'bg-rose-500' },
-    { title: 'Bandcamp', url: 'https://keygripmusic.bandcamp.com/', icon: <Bandcamplogo className='w-8 h-8' />, color: 'bg-blue-500' },
-    { title: 'Instagram', url: 'https://www.instagram.com/keygripmusic/', icon: <Instagram />, color: 'bg-purple-500' },
-    { title: 'TikTok', url: 'https://www.tiktok.com/@keygripmusicvstheworld', icon: <TikTok />, color: 'bg-slate-950' },
-  ];
-
-  const handleClick = (url: string, e: any) => {
-    e.preventDefault();
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
 
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed relative" style={{ backgroundImage: "url('/photos/KG_Banner.png')" }}>
