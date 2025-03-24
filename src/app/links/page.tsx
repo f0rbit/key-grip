@@ -67,7 +67,7 @@ const links: PlayLink[] = [
     href: 'https://open.spotify.com/artist/2op9lkkbIEdHT0ugHKPQDl?nd=1&dlsi=a260cb6fa4bd4320',
     icon: (
       <IconWrapper>
-        <Spotify className="w-full h-full object-contain block" />
+        <Spotify />
       </IconWrapper>
     ),
   },
@@ -76,7 +76,7 @@ const links: PlayLink[] = [
     href: 'https://music.apple.com/au/artist/key-grip/1670242625',
     icon: (
       <IconWrapper>
-        <AppleMusic className="w-full h-full object-contain block" />
+        <AppleMusic/>
       </IconWrapper>
     ),
   },
@@ -131,7 +131,7 @@ const MusicianLandingPage = () => {
           <div className="text-center mb-12">
             <div className="relative w-32 h-32 mx-auto mb-4">
               <Image
-                src="/photos/KG_profile.jpg"
+                src="/photos/betterprofilepic2.png"
                 alt="Artist Profile"
                 fill
                 className="rounded-full border-4 border-white object-cover"
