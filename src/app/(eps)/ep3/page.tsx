@@ -41,7 +41,7 @@ function AppleMusic() {
 const PLAY_LINKS: PlayLink[] = [
 	{ href: "https://open.spotify.com/album/723SLWIQo27r48H1b6nfcG?si=YZAQzwLJTZaaX6G56CKFxQ", icon: <Spotify />, text: "Spotify" },
 	{ href: "https://music.apple.com/au/album/key-grip-presents-ep/1798653758", icon: <AppleMusic />, text: "Apple Music" },
-	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo className='w-4 h-4' />, text: "Bandcamp" }
+	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo className='w-5 h-5' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component
@@ -49,7 +49,7 @@ const EpPage: React.FC = () => {
 
 	return (
 		<main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-			<VideoBackground videoPath={getVideoURL("walking_in_circles")} />
+			<VideoBackground videoPath="/photos/grass_video.mp4" />
 			<div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
 			{/* Main Content */}
@@ -78,7 +78,7 @@ const EpPage: React.FC = () => {
 								className="text-neutral-400 text-base"
 								dateTime="2025-02-10"
 							>
-								February 10, 2025
+								March 3, 2025
 							</time>
 							<PlaySection links={PLAY_LINKS} />
 						</div>
