@@ -4,14 +4,13 @@ import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep3CoverArt from "~/public/photos/KGPresentsCover.png";
 import Image from "next/image";
-import {Bandcamplogo} from '@/app/links/page';
 import "../../../components/audio-player.css";
 import VideoBackground from '@/components/VideoBackground';
 import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
-import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
+import { BandcampLogo2 } from '@/components/socials';
 import { getSongURL, getVideoURL } from '@/lib/storage';
 
 // Constants
@@ -41,7 +40,7 @@ function AppleMusic() {
 const PLAY_LINKS: PlayLink[] = [
 	{ href: "https://open.spotify.com/album/723SLWIQo27r48H1b6nfcG?si=YZAQzwLJTZaaX6G56CKFxQ", icon: <Spotify />, text: "Spotify" },
 	{ href: "https://music.apple.com/au/album/key-grip-presents-ep/1798653758", icon: <AppleMusic />, text: "Apple Music" },
-	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <Bandcamplogo className='w-5 h-5' />, text: "Bandcamp" }
+	{ href: "https://keygripmusic.bandcamp.com/album/key-grip-presents", icon: <BandcampLogo2 className='w-5 h-5' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component

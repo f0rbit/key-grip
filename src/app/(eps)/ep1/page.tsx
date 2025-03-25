@@ -4,15 +4,14 @@ import React from 'react';
 import { BurgerBar } from '@/components/burger-bar';
 import Ep1CoverArt from "~/public/ep1-cover.jpg";
 import Image from "next/image";
-import { Bandcamplogo } from '@/app/links/page';
 import "../../../components/audio-player.css";
 import CubeEffect from '@/components/ep1-cube-background';
 import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
-import { AppleMusicLogo, BandcampLogo, SpotifyLogo } from '@/components/socials';
 import { getSongURL } from '@/lib/storage';
+import { BandcampLogo2 } from '@/components/socials';
 
 // Constants
 const TRACKS: Track[] = [
@@ -42,7 +41,7 @@ function Spotify() {
 const PLAY_LINKS: PlayLink[] = [
   { href: "https://open.spotify.com/album/7iYB5p6mfH4fp6VBNc7cNH", icon: <Spotify />, text: "Spotify" },
   { href: "https://music.apple.com/au/album/key-grip-ep/1791267851", icon: <AppleMusic />, text: "Apple Music" },
-  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <Bandcamplogo className='w-5 h-5' />, text: "Bandcamp" }
+  { href: "https://keygripmusic.bandcamp.com/album/key-grip", icon: <BandcampLogo2 className='w-5 h-5' />, text: "Bandcamp" }
 ];
 
 // Main EpPage Component

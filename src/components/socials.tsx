@@ -62,6 +62,14 @@ export const BandcampLogo = () => (
 	  className="w-6 h-6"
 	/>
   )
+
+export const BandcampLogo2 = ({ className }: { className: string }) => (
+	<img
+	  src="photos/Bandcamp_white2.png"
+	  alt="Bandcamp"
+	  className={`object-contain block ${className}`}
+	/>
+  );
   
 export const InstagramLogo = () => (
 	<img
@@ -72,9 +80,28 @@ export const InstagramLogo = () => (
   )
   
 export const TikTokLogo = () => (
-	<img
+	 <img
 	  src='photos/tiktok_logo.webp'
 	  alt="Instagram"
 	  className='w-6 h-6'
 	/>
   )
+
+export const TikTokWhite = () => (
+	<img
+    src="photos/tiktokWhite.png"
+    alt="TikTok"
+    className="w-full h-full object-contain block"
+  />
+)
+
+export const YouTube = () => (
+  <svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 576 512"
+	fill="currentColor"
+	className="w-full h-full object-contain block"
+  >
+	<path d="M549.7 124.1c-6.3-24-25-42.7-48.9-48.9C456.1 64 288 64 288 64S119.9 64 75.2 75.2c-24 6.3-42.7 25-48.9 48.9C16 168.8 16 256 16 256s0 87.2 10.3 131.9c6.3 24 25 42.7 48.9 48.9 44.7 11.2 212.8 11.2 212.8 11.2s168.1 0 212.8-11.2c24-6.3 42.7-25 48.9-48.9C560 343.2 560 256 560 256s0-87.2-10.3-131.9zM232 336V176l142.7 80L232 336z" />
+  </svg>
+);
