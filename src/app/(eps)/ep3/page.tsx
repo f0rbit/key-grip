@@ -49,7 +49,7 @@ const EpPage: React.FC = () => {
 
 	return (
 		<main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-			<VideoBackground videoPath="/photos/grass_video.mp4" />
+			<VideoBackground videoPath={getVideoURL('grass_video')} />
 			<div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
 			{/* Main Content */}
