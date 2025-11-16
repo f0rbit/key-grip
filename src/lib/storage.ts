@@ -18,3 +18,7 @@ export function getSongURL(album: Album, song: string) {
 export function getVideoURL(name: string) {
 	return `${STORAGE_URL}/videos/${name}.mp4` as const;
 }
+
+export function getPosterURL(name: string) {
+	return `${STORAGE_URL}/posters/${name}.jpg` as const;
+}
