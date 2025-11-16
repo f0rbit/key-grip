@@ -10,7 +10,7 @@ import { PlaySection } from '@/components/audio-player';
 import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
-import { getSongURL, getVideoURL } from '@/lib/storage';
+import { getSongURL, getVideoURL, getPosterURL } from '@/lib/storage';
 import { BandcampLogo2 } from '@/components/socials';
 
 // Constants
@@ -49,7 +49,10 @@ const EpPage: React.FC = () => {
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-      <VideoBackground videoPath={getVideoURL("walking_in_circles")} />
+      <VideoBackground 
+        videoPath={getVideoURL("walking_in_circles")} 
+        posterPath={getPosterURL("walking_in_circles")}
+      />
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
       {/* Main Content */}

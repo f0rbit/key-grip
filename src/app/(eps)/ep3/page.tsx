@@ -11,7 +11,7 @@ import AudioPlayer from '@/components/AudioPlayer';
 import type { Track } from '@/components/AudioPlayer';
 import { RandomFontTitle } from '@/components/font-switcher';
 import { BandcampLogo2 } from '@/components/socials';
-import { getSongURL, getVideoURL } from '@/lib/storage';
+import { getSongURL, getVideoURL, getPosterURL } from '@/lib/storage';
 
 // Constants
 const TRACKS: Track[] = [// TODO: add new songs
@@ -48,7 +48,10 @@ const EpPage: React.FC = () => {
 
 	return (
 		<main className="relative w-full min-h-screen overflow-x-hidden pb-24">
-			<VideoBackground videoPath={getVideoURL('grass_video')} />
+			<VideoBackground 
+				videoPath={getVideoURL('grass_video')} 
+				posterPath={getPosterURL('grass_video')}
+			/>
 			<div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[1] top-0 left-0" />
 
 			{/* Main Content */}
